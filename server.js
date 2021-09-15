@@ -3,7 +3,6 @@ const router = require('./routes/index');
 require('dotenv').config();
 require('./config/database');
 
-
 const app = express();
 
 app.use(express.static('public'));

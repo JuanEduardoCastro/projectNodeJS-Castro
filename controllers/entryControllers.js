@@ -1,6 +1,6 @@
 const path = require('path');
 
-const Controllers = {
+const entryControllers = {
     home: (req, res) => {
         res.sendFile(path.join(__dirname, '..', 'views/index.html'));
     },
@@ -10,4 +10,4 @@ const Controllers = {
     }
 }
 
-module.exports = Controllers
+module.exports = entryControllers

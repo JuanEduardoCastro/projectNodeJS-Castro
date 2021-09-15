@@ -4,22 +4,179 @@ html * {
     box-sizing: border-box;
 }
 
+/* 
+#073601
+#b8ffae
+#cafffa
+*/
+
 body {
-    background-color: blue;
+    font-family: "open sans";
+    background-color: #b8ffae;
 }
 
 header {
-    background-color: red;
+    background-color: white;
+    width: 100vw;
+    height: 15vh;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10vw;
+    border-bottom: 1px solid lightgray;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+}
+
+header h1 {
+    color: #073601;
 }
 
 nav a {
-    color: white;
+    color: #073601;
+    font-weight: 600;
     text-decoration: none;
     font-size: 25px;
     margin-right: 2vw;
+}
 
+/* HOME PERSONAL ENTRY */
+
+.personalEntry{
+    width: 90vw;
+    height: 50vh;
+    margin: 5rem auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5vw;
+
+}
+
+/* LEFT SIDE */
+
+.personalEntryLeftSide {
+    background-color: white;
+    width: 40%;
+    height: 45vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 2rem;
+    gap: 2rem;
+}
+
+.personalEntryTitle {
+    font-size: 1.5rem;
+    color: #073601;
+}
+
+.personalEntryId {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.personalEntryId form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.4rem;
+
+}
+
+.personalEntryId input:nth-child(1) {
+    width: 50%;
+    height: 5vh;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 0 0.5rem;
+}
+
+.personalEntryId input:nth-child(1):focus {
+    outline: 1px solid transparent;
+}
+
+.personalEntryId input:nth-child(2) {
+    width: 30%;
+    height: 5vh;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+/* .personalEntryId input:nth-child(2):hover {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+} */
+
+.personalEntryId input:nth-child(2):active {
+    transform: scale(0.95);
+    transition: transform 0.2s;
+}
+
+/* RIGHT SIDE */
+
+.personalEntryRightSide {
+    background-color: white;
+    width: 40%;
+    height: 45vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 2rem;
+}
+
+.personalAdminTitle {
+    font-size: 1.5rem;
+    color: #073601;
+}
+
+.personalAdminId {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.personalAdminId form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.4rem;
+}
+
+.personalAdminId input:nth-child(1), .personalAdminId input:nth-child(2) {
+    width: 50%;
+    height: 5vh;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 0 0.5rem;
+
+}
+
+.personalAdminId input:nth-child(1):focus, .personalAdminId input:nth-child(2):focus {
+    outline: 1px solid transparent;
+}
+
+.personalAdminId input:nth-child(3) {
+    width: 30%;
+    height: 5vh;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+/* .personalAdminId input:nth-child(3):hover {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+} */
+
+.personalAdminId input:nth-child(3):active {
+    transform: scale(0.9);
+    transition: transform 0.2s;
 }
