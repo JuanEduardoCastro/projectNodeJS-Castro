@@ -5,17 +5,17 @@ const router = express.Router();
 router.route('/')
 .get(entryControllers.home)
 
-router.route('/empleado')
-.get(entryControllers.otra)
+router.route('/personal')
+.get(entryControllers.personal)
 
 router.route('/admin')
-.get(entryControllers.otra)
+.get(entryControllers.admin)
 
-router.route('/formulario/empleado')
-.get(entryControllers.otra)
+router.route('/admin/nuevo_empleado')
+.get(entryControllers.newPersonal)
 
-router.route('/registro')
-.get(entryControllers.otra)
+// router.route('/registro')
+// .get(entryControllers
 
 
 

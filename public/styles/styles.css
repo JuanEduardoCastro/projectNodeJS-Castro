@@ -41,7 +41,7 @@ nav a {
 
 /* HOME PERSONAL ENTRY */
 
-.personalEntry{
+.personalEntry, .personalHeader, .adminEntry, .adminNewPersonal {
     width: 90vw;
     height: 50vh;
     margin: 5rem auto;
@@ -116,6 +116,8 @@ nav a {
     transition: transform 0.2s;
 }
 
+
+
 /* RIGHT SIDE */
 
 .personalEntryRightSide {
@@ -157,7 +159,6 @@ nav a {
     border: 1px solid lightgray;
     border-radius: 5px;
     padding: 0 0.5rem;
-
 }
 
 .personalAdminId input:nth-child(1):focus, .personalAdminId input:nth-child(2):focus {
@@ -179,4 +180,122 @@ nav a {
 .personalAdminId input:nth-child(3):active {
     transform: scale(0.9);
     transition: transform 0.2s;
+}
+
+
+/* PERSONAL  */
+
+.personalHeader .personalProfile {
+    background-color: white;
+    width: 40%;
+    height: 45vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 2rem;
+}
+
+/* PERSONAL TASKS */
+
+.personalTasks {
+    background-color: white;
+    width: 40%;
+    height: 45vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 2rem;
+}
+
+
+
+/* ADMIN */
+
+.adminProfile {
+    background-color: white;
+    width: 40%;
+    height: 45vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 2rem;
+
+}
+
+/* ADMIN TASKS */
+
+.adminTasksPersonal, .adminTasksSelector {
+    background-color: white;
+    width: 40%;
+    height: 45vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 2rem;
+}
+
+.adminPersonalList {
+
+}
+
+.adminTasksList input {
+    width: 20vw;
+    height: 5vh;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 0 0.5rem;
+}
+
+.adminTasksList input:focus {
+    outline: 1px solid transparent;
+}
+
+
+/* NEW PERSONAL */
+
+.adminNewPersonalForm {
+    background-color: white;
+    width: 80%;
+    height: 45vh;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 2rem;
+} 
+
+.adminNewPersonalForm form {
+
+}
+
+.adminNewPersonalForm form > div {
+    
+}
+
+.adminNewPersonalForm form:nth-child() {
+    
 }
