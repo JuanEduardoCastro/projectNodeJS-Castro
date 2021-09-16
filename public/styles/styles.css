@@ -82,6 +82,10 @@ footer nav a {
     font-size: 18px;
 }
 
+.active {
+    text-decoration: underline;
+}
+
 footer img {
     width: 30px;
     height: 30px;
@@ -250,17 +254,32 @@ main {
     outline: 1px solid transparent;
 }
 
+.newUserBox .newUserSelect {
+    display: flex;
+    align-items: center;
+}
+
 .newUserBox form div > select {
     width: 60%;
-    height: 5vh;
-    font-size: 18px;
+    font-size: 16px;
     border: 1px solid #37004b;
     border-radius: 5px;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
 }
 
 .newUserBox form div > select:focus {
     outline: 1px solid transparent;
+}
+
+.newUserBox .newUserButton {
+    display: flex;
+    justify-content: center;
+}
+
+.newUserBox form div > input[type="submit"] {
+    width: 40%;
+    height: 10%;
+
 }
 
 
