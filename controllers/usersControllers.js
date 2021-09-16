@@ -2,7 +2,8 @@ const path = require('path');
 
 const usersControllers = {
     newUser: (req, res) => {
-        res.sendFile(path.join(__dirname, '..', 'views/newUser.html'));
+        res.render('newUser')
+        // res.sendFile(path.join(__dirname, '..', 'views/newUser.html'));
     },
 
     // personal: (req, res) => {

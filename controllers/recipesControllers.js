@@ -2,11 +2,15 @@ const path = require('path');
 
 const recipesControllers = {
     home: (req, res) => {
-        res.sendFile(path.join(__dirname, '..', 'views/index.html'));
+        res.render('index', {
+            title: 'HOME'
+        })
+        // res.sendFile(path.join(__dirname, '..', 'views/index.html'));
     },
 
     newRecipe: (req, res) => {
-        res.sendFile(path.join(__dirname, '..', 'views/newRecipe.html'));
+        res.render('newRecipe')
+        // res.sendFile(path.join(__dirname, '..', 'views/newRecipe.html'));
     },
 
     // admin: (req, res) => {
