@@ -1,18 +1,19 @@
 const express = require('express');
-const entryControllers = require('../controllers/entryControllers')
+const usersControllers = require('../controllers/usersControllers');
+const recipesControllers = require('../controllers/recipesControllers');
 const router = express.Router();
 
 router.route('/')
-.get(entryControllers.home)
+.get(recipesControllers.home)
 
-router.route('/personal')
-.get(entryControllers.personal)
+router.route('/nueva-receta')
+.get(recipesControllers.newRecipe)
 
-router.route('/admin')
-.get(entryControllers.admin)
+router.route('/nuevo-usuario')
+.get(usersControllers.newUser)
 
-router.route('/admin/nuevo_empleado')
-.get(entryControllers.newPersonal)
+router.route('/receta/:id')
+.get()
 
 // router.route('/registro')
 // .get(entryControllers
