@@ -4,7 +4,8 @@ const User = require('../models/user')
 const usersControllers = {
     newUser: (req, res) => {
         res.render('newUser', {
-            title: 'REGISTRO USUARIO'
+            title: 'REGISTRO',
+            userLogIn: req.session.userLogIn,
         })
     },
 
@@ -43,6 +44,7 @@ const usersControllers = {
             title: 'MI PERFIL',
             userProfile, 
             editUser: false,
+            userLogIn: req.session.userLogIn,
         })
     },
 
@@ -52,21 +54,27 @@ const usersControllers = {
             title: 'EDITAR USUARIO',
             userProfile, 
             editUser: true,
+            userLogIn: req.session.userLogIn,
         })
     },
 
-    // sendEditUser: async (req, res) => {
-    //     const userProfile = await User.findOneAndUpdate({ _id: req.session._id, ...req.body })
-    //     res.render('user', {
-    //         title: 'EDITAR USUARIO',
-    //         userProfile, 
-    //         editUser: false,
-    //     })
-    // },
+    deleteUser: async (req, res) => {
+        console.log(req.body)
+        if (req.body) {
+            await User.findOneAndDelete({ _id: req.session._id })
+            res.redirect('/')
+        } else {
+            res.render('deleteConfirm', {
+                title: 'ELIMINAR USUARIO',
+                userLogIn: req.session.userLogIn,
+            })
+        }
+    },
 
     logIn: (req, res) => {
         res.render('userLogin', {
-            title: 'INGRESO'
+            title: 'INGRESO',
+            userLogIn: req.session.userLogIn,
         })
     },
 
@@ -80,6 +88,12 @@ const usersControllers = {
             return res.redirect('/usuario')
         }
         res.render('/ingreso')
+    },
+
+    logOut: (req, res) => {
+        req.session.destroy(() => {
+            res.redirect('/')
+        })
     },
 
 

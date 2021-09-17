@@ -30,6 +30,12 @@ router.route('/nuevo-usuario')
 router.route('/usuario')
 .get(usersControllers.getUser)
 
+router.route('/confirmacion-eliminar-usuario')
+.get(usersControllers.deleteUser)
+
+router.route('/eliminar-usuario')
+.post(usersControllers.deleteUser)
+
 router.route('/editar-usuario')
 .get(usersControllers.editUser)
 .post(usersControllers.sendNewUser)
@@ -38,6 +44,8 @@ router.route('/ingreso')
 .get(usersControllers.logIn)
 .post(usersControllers.sendLogIn)
 
+router.route('/salir')
+.get(usersControllers.logOut)
 
 
 module.exports = router

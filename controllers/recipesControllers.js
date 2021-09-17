@@ -4,7 +4,8 @@ const Recipe = require('../models/recipe')
 const recipesControllers = {
     home: (req, res) => {
         res.render('index', {
-            title: 'HOME'
+            title: 'HOME',
+            userLogIn: req.session.userLogIn,
         })
     },
 
@@ -13,6 +14,7 @@ const recipesControllers = {
         res.render('recipes', {
             title: 'RECETAS',
             recipesList: allRecipes,
+            userLogIn: req.session.userLogIn,
         })
     },
 
@@ -20,6 +22,7 @@ const recipesControllers = {
         res.render('newRecipe', {
             title: 'NUEVA RECETA',
             editRecipe: false,
+            userLogIn: req.session.userLogIn,
         })
     },
 
@@ -61,6 +64,7 @@ const recipesControllers = {
             title: 'MI RECETA',
             recipeProfile, 
             editRecipe: false,
+            userLogIn: req.session.userLogIn,
         })
     },
 
@@ -70,18 +74,9 @@ const recipesControllers = {
             title: 'EDITAR RECETA',
             recipeProfile, 
             editRecipe: true,
-        })
-        
+            userLogIn: req.session.userLogIn,
+        })  
     },
-
-    // sendEditRecipe: async (req, res) => {
-    //     const recipeProfile = await Recipe.findOneAndUpdate({ _id: req.params.id, ...req.body })
-    //     res.render('recipe', {
-    //         title: 'EDITAR RECETA',
-    //         recipeProfile, 
-    //         editRecipe: false,
-    //     })
-    // },
 
 }
 

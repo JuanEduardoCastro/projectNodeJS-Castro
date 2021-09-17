@@ -7,12 +7,16 @@
         <nav>
             <a class="<%= title.includes('HOME') ? 'active' : null %>" href="/">Home</a>
             <a class="<%= title.includes('RECETAS') ? 'active' : null %>" href="/recetas">Recetas</a>
-            <a class="<%= title.includes('NUEVA') ? 'active' : null %>" href="/nueva-receta">Nueva receta</a>
 
-            <a class="<%= title.includes('INGRESO') ? 'active' : null %>" href="/ingreso">Login</a>
-            <a class="<%= title.includes('EDITAR') ? 'active' : null %>" href="/nuevo-usuario">Registrarse</a>
-            <a class="<%= title.includes('USUARIO') ? 'active' : null %>" href="/usuario">Mi perfil</a>
-            
+            <!-- para bloquear si no hay usuario -->
+            <% if (userLogIn) { %>
+                <a class="<%= title.includes('USUARIO') ? 'active' : null %>" href="/usuario">Mi perfil</a>
+                <a class="<%= title.includes('NUEVA') ? 'active' : null %>" href="/nueva-receta">Nueva receta</a>
+                <a  href="/">Salir</a>
+            <% } else { %>
+                <a class="<%= title.includes('INGRESO') ? 'active' : null %>" href="/ingreso">Ingresar</a>
+                <a class="<%= title.includes('REGISTRO') ? 'active' : null %>" href="/nuevo-usuario">Registrarse</a>
+            <% } %>
         </nav>
     </header>
     <main>
