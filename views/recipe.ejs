@@ -1,0 +1,93 @@
+<%-  include('partials/head.ejs') %> 
+<%-  include('partials/header.ejs') %> 
+
+    <% let queryEdit = editRecipe %>
+    <% let recipeId = editRecipe ? recipeProfile._id : null %>
+    <!-- <%= console.log(editRecipe) %> -->
+        <div class="newRecipeBox">
+            <div class="newRecipeTitle">
+                <h2>Agrega tu receta y compártela en  <span>COMUNIDAD COCINERA</span></h2>
+            </div>
+            <div>
+                <a href="/editar-receta/<%= recipeProfile._id %>" ><button>Editar receta</button></a>
+            </div>
+            <form action="/nueva-receta?edit=<%= queryEdit %>&id=<%= recipeId %>" method="POST">
+                <div class="newRecipeLeftSide">
+                    <div>
+                        <label for="recipePhoto" >URL de la foto:</label>
+                        <% if (editRecipe === false) { %> 
+                            <p><%= recipeProfile.recipePhoto %></p>
+                        <% } else { %>
+                            <input type="text" name="recipePhoto" id="recipePhoto" required value="<%= recipeProfile.recipePhoto %>"/>
+                        <% } %>    
+                        <!-- <input type="text" name="recipePhoto" id="recipePhoto" required/> -->
+                    </div>
+                    <div>
+                        <label for="recipeTitle" >Titulo receta:</label>
+                        <% if (editRecipe === false) { %> 
+                            <p><%= recipeProfile.recipeTitle %></p>
+                        <% } else { %>
+                            <input type="text" name="recipeTitle" id="recipeTitle" required value="<%= recipeProfile.recipeTitle %>"/>
+                        <% } %>    
+                    </div>
+                    <div>
+                        <label for="description" >Descripción:</label>
+                        <% if (editRecipe === false) { %> 
+                            <p><%= recipeProfile.description %></p>
+                        <% } else { %>
+                            <input type="text" name="description" id="description" required value="<%= recipeProfile.description %>"/>
+                        <% } %>    
+                    </div>
+                    <div>
+                        <label for="duration" >Duración:</label>
+                        <% if (editRecipe === false) { %> 
+                            <p><%= recipeProfile.duration %></p>
+                        <% } else { %>
+                            <input type="text" name="duration" id="duration" required value="<%= recipeProfile.duration %>"/>
+                        <% } %>    
+                    </div>
+                    <div>
+                        <label for="rations" >Raciones:</label>
+                        <% if (editRecipe === false) { %> 
+                            <p><%= recipeProfile.rations %></p>
+                        <% } else { %>
+                            <input type="text" name="rations" id="rations" required value="<%= recipeProfile.rations %>"/>
+                        <% } %>    
+                    </div>
+                    <div class="newRecipeIngredients">
+                        <label for="ingredients" >Ingrediente:</label>
+                        <% if (editRecipe === false) { %> 
+                            <p><%= recipeProfile.ingredients[0].ingredientsNumber %> <%= recipeProfile.ingredients[0].ingredientsUnit %> <%= recipeProfile.ingredients[0].ingredientsName %></p>
+                        <% } else { %>
+                            <input type="text" name="ingredientsNumber" id="ingredientsNumber" required value="<%= recipeProfile.ingredients[0].ingredientsNumber %>"/>
+                            <select name="ingredientsUnit">
+                                <option value="<%= recipeProfile.ingredientsUnit %>"> <%= recipeProfile.ingredients[0].ingredientsUnit %> </option>
+                                <option value="spoon">Crdas</option>
+                                <option value="cup">Tzs</option>
+                                <option value="grams">Grms</option>
+                                <option value="ounce">Ozs</option>
+                            </select>
+                            <input type="text" name="ingredientsName" id="ingredients" required value="<%= recipeProfile.ingredients[0].ingredientsNumber %>">
+                        <% } %>    
+                    </div>
+                    <div>
+                        <label for="steps" >Procedimiento:</label>
+                        <% if (editRecipe === false) { %> 
+                            <p><%= recipeProfile.steps %></p>
+                        <% } else { %>
+                            <input type="text" name="steps" id="steps" required value="<%= recipeProfile.steps %>"/>
+                        <% } %>    
+                    </div>
+                </div>
+                <% if (editRecipe === false) { %>
+                    <div></div>
+                <% } else { %>
+                    <div class="newRecipeButton">
+                        <input type="submit" value="send" />
+                    </div>
+                <% } %>
+                
+            </form>
+        </div>
+
+<%-  include('partials/footer.ejs') %> 

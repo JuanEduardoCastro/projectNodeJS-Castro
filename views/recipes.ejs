@@ -1,0 +1,30 @@
+<%-  include('partials/head.ejs') %> 
+<%-  include('partials/header.ejs') %> 
+
+    <div class="recipesBox">
+        <div class="recipesBoxTitle">
+            <h2>esto es recetas</h2>
+        </div>
+    <% recipesList.map((recipe, index) => { %>
+        <div class="recipeCard">
+            <div class="recipeCardPhoto" style="background-image: url('<%= recipe.recipePhoto %>')"> 
+            </div>
+            <div class="recipeCardBody">
+                <div>
+                    <div class="recipeCardTitle"><p><%= recipe.recipeTitle %></p></div>
+                    <!-- <div class="recipeCardLikes"><p>likes</p></div> -->
+                </div>
+                <div class="recipeCardDescription"><p><%= recipe.description %></p></div>
+                <div>
+                    <div class="recipeCardDuration"><p><%= recipe.duration %></p></div>
+                    <div class="recipeCardRations"><p><%= recipe.rations %></p></div>
+                </div>
+                <div class="recipeCardIngredients"><p><%= recipe.ingredients %></p></div>
+                <div class="recipeCardSteps"><p><%= recipe.steps %></p></div>
+            </di>
+        </div>
+    </div>
+    <% }) %>
+    
+   
+<%-  include('partials/footer.ejs') %> 

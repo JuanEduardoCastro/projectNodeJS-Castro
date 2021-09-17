@@ -6,8 +6,13 @@
         </div>
         <nav>
             <a class="<%= title.includes('HOME') ? 'active' : null %>" href="/">Home</a>
-            <a href="/recetas">Recetas</a>
-            <a href="/">Login</a>
+            <a class="<%= title.includes('RECETAS') ? 'active' : null %>" href="/recetas">Recetas</a>
+            <a class="<%= title.includes('NUEVA') ? 'active' : null %>" href="/nueva-receta">Nueva receta</a>
+
+            <a class="<%= title.includes('INGRESO') ? 'active' : null %>" href="/ingreso">Login</a>
+            <a class="<%= title.includes('EDITAR') ? 'active' : null %>" href="/nuevo-usuario">Registrarse</a>
+            <a class="<%= title.includes('USUARIO') ? 'active' : null %>" href="/usuario">Mi perfil</a>
+            
         </nav>
     </header>
     <main>

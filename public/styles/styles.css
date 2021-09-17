@@ -279,7 +279,6 @@ main {
 .newUserBox form div > input[type="submit"] {
     width: 40%;
     height: 10%;
-
 }
 
 
@@ -300,7 +299,6 @@ main {
     gap: 2rem;
 }
 
-
 .newRecipeBox .newRecipeTitle {
     width: 75%;
     text-align: center;
@@ -309,21 +307,25 @@ main {
 .newRecipeBox form {
     width: 95%;
     display: flex;
+    flex-direction: column;
     gap: 1.3rem;
 }
 
 .newRecipeBox .newRecipeLeftSide, 
 .newRecipeBox .newRecipeRightSide {
-    width: 50%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 } 
 
+/* left side */
+
 .newRecipeBox .newRecipeLeftSide > div {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 0.8rem;
 }
 
@@ -347,46 +349,103 @@ main {
     outline: 1px solid transparent;
 }
 
-.newRecipeBox .newRecipeLeftSide div > input[type="number"] {
-    width: 15%;
-}
-
-.newRecipeBox .newRecipeRightSide div > select {
-    width: 60%;
+.newRecipeBox .newRecipeLeftSide div > select {
+    width: 14%;
     height: 5vh;
-    font-size: 18px;
+    font-size: 16px;
     border: 1px solid #37004b;
     border-radius: 5px;
-    padding: 1rem 0.5rem;
+    padding: 0 0.5rem;
 }
 
-.newRecipeBox .newRecipeRightSide div > select:focus {
-    outline: 1px solid transparent;
+.newRecipeBox .newRecipeLeftSide div > input[type="number"] {
+    width: 8%;
+} 
+
+.newRecipeIngredients > input[type="text"] {
+    width: 35% !important; 
 }
 
-.newRecipeBox .newRecipeRightSide > div {
+.newRecipeButton {
     width: 100%;
+    height: 5vh;
     display: flex;
-    justify-content: space-between;
-    gap: 0.8rem;
+    justify-content: center;
+} 
+
+
+.newRecipeButton input[type="submit"] {
+    width: 40%;
+    height: 100%;
+    margin-left: 10vw;
 }
 
-.newRecipeBox .newRecipeRightSide div > label {
-    width: 40%;
-    text-align: right;
-    font-size: 18px;
+
+/* RENDER RECIPES */
+
+.recipesBox {
+    width: 90%;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
+.recipesBox .recipesBoxTitle {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.recipesBox .recipeCard {
+    border-radius: 8px;
+    width: 50%;
+    height: 100vh;
+    margin: 5rem auto;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+}
+
+.recipesBox .recipeCard .recipeCardPhoto {
+    background-color: lightgray;
+    background-size: cover;
+    background-position: cover;
+    border-radius-top: 8px;
+    width: 100%;
+    height: 40vh;
+}
+
+.recipesBox .recipeCard .recipeCardBody {
+    background-color: white;
+    border-radius-bottom: 8px;
+    width: 100%;
+    min-height: 60vh;
+    margin: 0 auto; */
+}
+
+.recipesBox .recipeCard .recipeCardBody >div:nth-child(1) {
+    padding: 1vh 0.5vw;
+    text-align: center;
+    font-size: 24px;
     font-weight: 600;
 }
 
-.newRecipeBox .newRecipeRightSide div > input {
-    width: 60%;
-    height: 5vh;
+.recipesBox .recipeCard .recipeCardBody >div:nth-child(2) {
+    margin: 1vh auto;
     font-size: 18px;
-    border: 1px solid #37004b;
-    border-radius: 5px;
-    padding: 1rem 0.5rem;
 }
 
-.newRecipeBox .newRecipeRightSide div > input:focus {
-    outline: 1px solid transparent;
+.recipesBox .recipeCard .recipeCardBody >div:nth-child(3) {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 8vw;
+    margin: 1vh auto;
+    font-size: 18px;
+}
+
+.recipesBox .recipeCard .recipeCardBody >div:nth-child(4) {
+    border-bottom: 1px solid lightgray;
+    padding: 1vh 0;
+    font-size: 18px;
+}
+
+.recipesBox .recipeCard .recipeCardBody >div:nth-child(5) {
+    padding-top: 1vh;
+    font-size: 18px;
 }

@@ -1,0 +1,33 @@
+<%-  include('partials/head.ejs') %> 
+<%-  include('partials/header.ejs') %> 
+
+        <div class="newUserBox">
+            <div class="newUserTitle">
+                <h2>Entra a la <span>COMUNIDAD COCINERA</span></h2>
+            </div>
+            <form action="/ingreso" method="POST">
+                <div>
+                    <label for="eMail" >Correo electrónico:</label>
+                    <input type="text" name="eMail" id="eMail" required/>
+                </div>
+                <div>
+                    <label for="password" >Password:</label>
+                    <input type="password" name="password" id="password" required/>
+                </div>
+                <div>
+                </div>  
+                <div>
+                </div>
+                <div>
+                </div>
+                <div class="newUserSelect"> 
+                </div>
+                <div class="newUserSelect">
+                </div>
+                <div class="newUserButton">
+                    <input type="submit" value="send" />
+                </div>    
+            </form>
+        </div>
+   
+<%-  include('partials/footer.ejs') %> 
