@@ -14,8 +14,7 @@ const usersControllers = {
 
     sendNewUser: async (req, res) => {
         const {eMail, password, name, lastName, photo, job, country} = req.body
-        let newUser
-        //catchear  
+        let newUser 
         if (req.query.edit) {
             newUser = await User.findOne({ _id: req.session._id })
             newUser.name = name
@@ -25,10 +24,22 @@ const usersControllers = {
             newUser.country = country
         } else {
             let hashPassword = bcrypt.hashSync(password)
-            //catchear
             newUser = new User({
                 eMail, password: hashPassword, name, lastName, photo, job, country
             })
+            try {
+                let userCheck = await User.findOne({ eMail: eMail })
+                if (userCheck) {
+                    throw new Error()
+                }
+            } catch (error) {
+                res.render('newUser', {
+                    title: 'REGISTRO',
+                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                    validationsError: {message: 'El correo electrónico ya está registrado.'},
+                })
+                return error
+            }
         }
         try {
             await newUser.save()
@@ -38,28 +49,58 @@ const usersControllers = {
                 res.redirect('/ingreso')
             }
         } catch (error) {
-            console.log(error)
+            res.render('newUser', {
+                title: 'REGISTRO',
+                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                validationsError: {message: 'Hubo un problema con la base de datos. Intentetelo mas tarde.'},
+            })
         }
     },
-    //catchear
+    // probar catch
     getUser: async (req, res) => {
-        const userProfile = await User.findOne({ _id: req.session._id })
-        res.render('user', {
-            title: 'MI PERFIL',
-            userProfile, 
-            editUser: false,
-            userLogIn: req.session.userLogIn ? req.session.userLogIn : false        
-        })
+        try {
+            const userProfile = await User.findOne({ _id: req.session._id })
+            if (userProfile) {
+                res.render('user', {
+                    title: 'MI PERFIL',
+                    userProfile, 
+                    editUser: false,
+                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                    validationsError: false        
+                })
+            } else {
+                throw new Error()
+            }
+        } catch (error) {
+            req.session.destroy(() => {
+                res.redirect('/')
+            })
+        }
     },
     //catchear 
     editUser: async (req, res) => {
-        const userProfile = await User.findOne({ _id: req.session._id })
-        res.render('user', {
-            title: 'EDITAR PERFIL',
-            userProfile, 
-            editUser: true,
-            userLogIn: req.session.userLogIn ? req.session.userLogIn : false        
-        })
+        try {
+            const userProfile = await User.findOne({ _id: req.session._id })
+            if (userProfile) {
+                res.render('user', {
+                    title: 'EDITAR PERFIL',
+                    userProfile, 
+                    editUser: true,
+                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                    validationsError: false     
+                })
+            } else {
+                throw new Error()
+            }
+        } catch (error) {
+            res.render('user', {
+                title: 'EDITAR PERFIL',
+                userProfile, 
+                editUser: true,
+                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                validationsError: {message: 'Hubo un problema con la base de datos. Intentetelo mas tarde.'}
+            })
+        }
     },
 
     deleteUser: async (req, res) => {
@@ -90,7 +131,8 @@ const usersControllers = {
         } else {
             res.render('deleteConfirm', {
                 title: 'ELIMINAR USUARIO',
-                userLogIn: req.session.userLogIn ? req.session.userLogIn : false            
+                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                errorMessage: false           
             })
         }
     },
@@ -111,6 +153,7 @@ const usersControllers = {
             if (hashPassword) {
                 req.session.userLogIn = true
                 req.session.name = userLogIn.name
+                req.session.name = userLogIn.eMail
                 req.session._id = userLogIn._id
                 return res.redirect('/usuario')
             } else {

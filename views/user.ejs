@@ -2,13 +2,16 @@
 <%-  include('partials/header.ejs') %> 
 
     <% let queryUserEdit = editUser %>
-
+    <% let className = validationsError ? 'errorMessage' : 'errorMessageHidden' %>
         <div class="newUserBox">
             <div class="newUserTitle">
                 <h2>Bienvenido a la <span>COMUNIDAD COCINERA</span></h2>
             </div>
             <div class="newUserTitleButton">
                 <a href="/editar-usuario" ><p>Editar perfil</p></a>
+            </div>
+            <div class=<%= className %>>
+                <p><%= validationsError.message %></p>
             </div>
             <form action="/nuevo-usuario?edit=<%= queryUserEdit %>" method="POST">
                 <div>

@@ -40,7 +40,7 @@ router.route('/eliminar-usuario')
 
 router.route('/editar-usuario')
 .get(usersControllers.editUser)
-.post(usersControllers.sendNewUser)
+.post(userValidator, usersControllers.sendNewUser)
 
 router.route('/ingreso')
 .get(usersControllers.logIn)
