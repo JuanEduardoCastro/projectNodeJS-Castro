@@ -2,6 +2,8 @@ const express = require('express');
 const usersControllers = require('../controllers/usersControllers');
 const recipesControllers = require('../controllers/recipesControllers');
 const router = express.Router();
+const userValidator = require('../controllers/userValidator');
+const passport = require('passport');
 
 router.route('/')
 .get(recipesControllers.home)
@@ -12,7 +14,7 @@ router.route('/recetas')
 
 // RECIPE
 router.route('/nueva-receta')
-.get(recipesControllers.newRecipe)
+.get(/* passport.authenticate('local', {session: false}), */ recipesControllers.newRecipe)
 .post(recipesControllers.sendNewRecipe)
 
 router.route('/receta/:id')
@@ -25,7 +27,7 @@ router.route('/editar-receta/:id')
 // USERS
 router.route('/nuevo-usuario')
 .get(usersControllers.newUser)
-.post(usersControllers.sendNewUser)
+.post(userValidator, usersControllers.sendNewUser)
 
 router.route('/usuario')
 .get(usersControllers.getUser)

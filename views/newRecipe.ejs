@@ -1,6 +1,7 @@
 <%-  include('partials/head.ejs') %> 
 <%-  include('partials/header.ejs') %> 
 
+
         <div class="newRecipeBox">
             <div class="newRecipeTitle">
                 <h2>Agrega tu receta y compártela en  <span>COMUNIDAD COCINERA</span></h2>
@@ -28,9 +29,24 @@
                         <input type="text" name="rations" id="rations" required/>
                     </div>
                     <div class="newRecipeIngredients">
+                        <div class="ingredientsLine">
+                            <label for="ingredients" >Ingrediente:</label>
+                            <input type="number" name="ingredients" id="ingredients" pattern="^[0-9]+" required/>
+                            <select name="ingredients">
+                                <option value=""> -- </option>
+                                <option value="unit">Unidad</option>
+                                <option value="spoon">Crdas</option>
+                                <option value="cup">Tzs</option>
+                                <option value="grams">Grms</option>
+                                <option value="ounce">Ozs</option>
+                            </select>
+                            <input type="text" name="ingredients" id="ingredients" required/>
+                        </div>
+                    </div>
+                    <!-- <div class="newRecipeIngredients">
                         <label for="ingredients" >Ingrediente:</label>
-                        <input type="number" name="ingredientsNumber" id="ingredients" required/>
-                        <select name="ingredientsUnit">
+                        <input type="number" name="ingredients" id="ingredients" pattern="^[0-9]+" required/>
+                        <select name="ingredients">
                             <option value=""> -- </option>
                             <option value="unit">Unidad</option>
                             <option value="spoon">Crdas</option>
@@ -38,20 +54,12 @@
                             <option value="grams">Grms</option>
                             <option value="ounce">Ozs</option>
                         </select>
-                        <input type="text" name="ingredientsName" id="ingredients" required/>
-                    </div>
-                    <!-- <div class="newRecipeIngredients">
-                        <label for="ingredients" >Ingrediente:</label>
-                        <input type="number" name="ingredientsNumber" id="ingredients" required/>
-                        <select name="ingredientsUnit">
-                            <option value=""> -- </option>
-                            <option value="spoon">Crdas</option>
-                            <option value="cup">Tzs</option>
-                            <option value="grams">Grms</option>
-                            <option value="ounce">Ozs</option>
-                        </select>
-                        <input type="text" name="ingredientsName" id="ingredients" required/>
+                        <input type="text" name="ingredients" id="ingredients" required/>
                     </div> -->
+                    <div>
+                        <label for="steps" >Procedimiento:</label>
+                        <input type="text" name="steps" id="steps" required/>
+                    </div>                   
                     <div>
                         <label for="steps" >Procedimiento:</label>
                         <input type="text" name="steps" id="steps" required/>

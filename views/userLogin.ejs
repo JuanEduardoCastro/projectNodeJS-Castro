@@ -1,9 +1,13 @@
 <%-  include('partials/head.ejs') %> 
 <%-  include('partials/header.ejs') %> 
-
+    
+    <% let className = errorMessage ? 'errorMessage' : 'errorMessageHidden' %>
         <div class="newUserBox">
             <div class="newUserTitle">
                 <h2>Entra a la <span>COMUNIDAD COCINERA</span></h2>
+            </div>
+            <div class=<%= className %>>
+                <p><%= errorMessage %></p>
             </div>
             <form action="/ingreso" method="POST">
                 <div>
@@ -25,7 +29,7 @@
                 <div class="newUserSelect">
                 </div>
                 <div class="newUserButton">
-                    <input type="submit" value="send" />
+                    <input type="submit" value="Ingresar" />
                 </div>    
             </form>
         </div>

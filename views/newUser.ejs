@@ -1,9 +1,13 @@
 <%-  include('partials/head.ejs') %> 
 <%-  include('partials/header.ejs') %> 
 
+    <% let className = validationsError ? 'errorMessage' : 'errorMessageHidden' %>
         <div class="newUserBox">
             <div class="newUserTitle">
-                <h2>Registrate como nuevo usuario de la <span>COMUNIDAD COCINERA</span></h2>
+                <h2>Regístrate como nuevo usuario de la <span>COMUNIDAD COCINERA</span></h2>
+            </div>
+            <div class=<%= className %>>
+                <p><%= validationsError.message %></p>
             </div>
             <form action="/nuevo-usuario" method="POST">
                 <div>

@@ -1,9 +1,13 @@
 <%-  include('partials/head.ejs') %> 
 <%-  include('partials/header.ejs') %> 
 
+    <% let className = errorMessage ? 'errorMessage' : 'errorMessageHidden' %>
         <div class="newUserBox">
             <div class="newUserTitle">
                 <h2>Confirma que quieres eliminar tu cuenta ingresando tu correo electrónico y contraseña</h2> 
+            </div>
+            <div class=<%= className %>>
+                <p><%= errorMessage %></p>
             </div>
             <form action="/eliminar-usuario" method="POST">
                 <div>
