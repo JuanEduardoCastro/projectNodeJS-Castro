@@ -149,7 +149,6 @@ const recipesControllers = {
 
     deleteRecipe: async (req, res) => {
         if (req.session.userLogIn) {
-
             if (req.body.recipeTitle) {
                 try {
                     if (req.body.recipeTitle) {
