@@ -2,7 +2,7 @@
 <%-  include('partials/header.ejs') %> 
 
     <% let titleOrError = errorMessage ? errorMessage : 'Estas son tus recetas' %>
-    <% let list = recipesList.length < 1 ? 'No tienes ninguna receta todavia' : titleOrError %>
+    <% let list = recipesList.length < 1 ? 'No tienes ninguna receta todavía' : titleOrError %>
     <div class="recipesBox">
         <div class="recipesBoxTitle">
             <p><%= errorMessage ? errorMessage : list %> <%= !errorMessage ? userName : null %></p>
