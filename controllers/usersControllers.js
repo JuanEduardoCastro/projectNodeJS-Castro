@@ -1,7 +1,6 @@
 const path = require('path');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
 
 const usersControllers = {
     newUser: (req, res) => {
@@ -56,85 +55,97 @@ const usersControllers = {
             })
         }
     },
-    // probar catch
+
     getUser: async (req, res) => {
-        try {
-            const userProfile = await User.findOne({ _id: req.session._id })
-            if (userProfile) {
-                res.render('user', {
-                    title: 'MI PERFIL',
-                    userProfile, 
-                    editUser: false,
-                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                    validationsError: false        
+        if (req.session.userLogIn) {
+            try {
+                const userProfile = await User.findOne({ _id: req.session._id })
+                if (userProfile) {
+                    res.render('user', {
+                        title: 'MI PERFIL',
+                        userProfile, 
+                        editUser: false,
+                        userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                        validationsError: false        
+                    })
+                } else {
+                    throw new Error()
+                }
+            } catch (error) {
+                req.session.destroy(() => {
+                    res.redirect('/')
                 })
-            } else {
-                throw new Error()
             }
-        } catch (error) {
-            req.session.destroy(() => {
-                res.redirect('/')
-            })
-        }
+        } else {
+            res.redirect('/')
+        } 
     },
-    //catchear 
+
     editUser: async (req, res) => {
-        try {
-            const userProfile = await User.findOne({ _id: req.session._id })
-            if (userProfile) {
+        if (req.session.userLogIn) {
+            try {
+                const userProfile = await User.findOne({ _id: req.session._id })
+                if (userProfile) {
+                    res.render('user', {
+                        title: 'EDITAR PERFIL',
+                        userProfile, 
+                        editUser: true,
+                        userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                        validationsError: false     
+                    })
+                } else {
+                    throw new Error()
+                }
+            } catch (error) {
                 res.render('user', {
                     title: 'EDITAR PERFIL',
                     userProfile, 
                     editUser: true,
                     userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                    validationsError: false     
+                    validationsError: {message: 'Hubo un problema con la base de datos. Intentetelo mas tarde.'}
                 })
-            } else {
-                throw new Error()
             }
-        } catch (error) {
-            res.render('user', {
-                title: 'EDITAR PERFIL',
-                userProfile, 
-                editUser: true,
-                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                validationsError: {message: 'Hubo un problema con la base de datos. Intentetelo mas tarde.'}
-            })
+        } else {
+            res.redirect('/')
         }
     },
 
     deleteUser: async (req, res) => {
-        const {eMail, password} = req.body
-        if (eMail && password) {
-            try {
-                if (req.body.eMail && req.body.password) {
-                    let userConfirm = await User.findOne({ eMail })
-                    let hashPassword = bcrypt.compareSync(password, userConfirm.password)  
-                    if (hashPassword) {
-                        await User.findOneAndDelete({ _id: req.session._id, })
-                        req.session.destroy(() => {
-                            res.redirect('/')
-                            //mandar a deleteOk
-                        })
+        if (req.session.userLogIn) {
+            const {eMail, password} = req.body
+            if (eMail && password) {
+                try {
+                    if (req.body.eMail && req.body.password) {
+                        let userConfirm = await User.findOne({ eMail })
+                        let hashPassword = bcrypt.compareSync(password, userConfirm.password)  
+                        if (hashPassword) {
+                            await User.findOneAndDelete({ _id: req.session._id, })
+                            req.session.destroy(() => {
+                                res.redirect('/')
+                                //mandar a deleteOk
+                            })
+                        } else {
+                            throw new Error()
+                        }
                     } else {
                         throw new Error()
                     }
-                } else {
-                    throw new Error()
+                } catch (error) {
+                    res.render('deleteConfirm', {
+                        title: 'ELIMINAR USUARIO',
+                        userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                        errorMessage: 'Correo electrónico o conaseña invalida',
+                    })
                 }
-            } catch (error) {
+            } else {
                 res.render('deleteConfirm', {
                     title: 'ELIMINAR USUARIO',
                     userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                    errorMessage: 'Correo electrónico o conaseña invalida',
+                    errorMessage: false           
                 })
             }
         } else {
-            res.render('deleteConfirm', {
-                title: 'ELIMINAR USUARIO',
-                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                errorMessage: false           
-            })
+            res.redirect('/')
         }
     },
 
@@ -154,7 +165,7 @@ const usersControllers = {
             if (hashPassword) {
                 req.session.userLogIn = true
                 req.session.name = userLogIn.name
-                req.session.name = userLogIn.eMail
+                req.session.eMail = userLogIn.eMail
                 req.session._id = userLogIn._id
                 return res.redirect('/usuario')
             } else {

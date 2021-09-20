@@ -50,7 +50,6 @@ const userValidator = (req, res, next) => {
                 validationsError: validations.error ? validations.error.details[0] : false
             })
         } else {
-            console.log(req.body)
             res.render('user', {
                 title: 'REGISTRO',
                 userProfile: {eMail: req.session.eMail, name: req.body.name, lastName: req.body.lastName, photo: req.body.photo, job: req.body.job, country: req.body.country},

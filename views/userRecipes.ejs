@@ -1,10 +1,10 @@
 <%-  include('partials/head.ejs') %> 
 <%-  include('partials/header.ejs') %> 
 
-    <% let titleOrError = errorMessage ? errorMessage : 'Encuentra la receta que mas te guste y empieza a cocinar' %>
+    <% let titleOrError = errorMessage ? errorMessage : 'Estas son tus recetas' %>
     <div class="recipesBox">
         <div class="recipesBoxTitle">
-            <p><%= titleOrError %></p>
+            <p><%= titleOrError %> <%= !errorMessage ? userName : null %></p>
         </div>
     <% recipesList.map((recipe, index) => { %>
         <div class="recipeCard">
@@ -34,6 +34,9 @@
                     <% }) %>
                 </div>
             </di>
+            <div class="recipeCardEditButton">
+                <a href="/receta/<%= recipe._id %>" ><p>Editar receta</p></a>
+            </div>
         </div>
     </div>
     <% }) %>

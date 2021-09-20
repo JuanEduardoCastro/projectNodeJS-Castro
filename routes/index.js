@@ -3,7 +3,8 @@ const usersControllers = require('../controllers/usersControllers');
 const recipesControllers = require('../controllers/recipesControllers');
 const router = express.Router();
 const userValidator = require('../controllers/userValidator');
-const passport = require('passport');
+const recipeValidator = require('../controllers/recipeValidator');
+
 
 router.route('/')
 .get(recipesControllers.home)
@@ -12,9 +13,12 @@ router.route('/')
 router.route('/recetas')
 .get(recipesControllers.getAllRecipes)
 
+router.route('/recetas-del-usuario')
+.get(recipesControllers.getRecipesByUser)
+
 // RECIPE
 router.route('/nueva-receta')
-.get(/* passport.authenticate('local', {session: false}), */ recipesControllers.newRecipe)
+.get(recipesControllers.newRecipe)
 .post(recipesControllers.sendNewRecipe)
 
 router.route('/receta/:id')
@@ -22,7 +26,7 @@ router.route('/receta/:id')
 
 router.route('/editar-receta/:id')
 .get(recipesControllers.editRecipe)
-// .post(recipesControllers.sendEditRecipe)
+.post( recipesControllers.sendNewRecipe)
 
 router.route('/confirmacion-eliminar-receta/:id')
 .get(recipesControllers.deleteRecipe)

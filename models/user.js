@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
     photo: {type: String, require: true},
     job: {type: String, require: true},
     country: {type: String, require: true},
-    likes: {type: Array},
 })
 
 const User = mongoose.model('User', userSchema);

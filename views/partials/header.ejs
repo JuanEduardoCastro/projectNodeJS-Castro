@@ -6,11 +6,12 @@
         </div>
         <nav>
             <a class="<%= title.includes('HOME') ? 'active' : null %>" href="/">Home</a>
-            <a class="<%= title.includes('RECETAS') ? 'active' : null %>" href="/recetas">Recetas</a>
+            <a class="<%= title.includes('RECETARIO') ? 'active' : null %>" href="/recetas">Recetas</a>
 
             <!-- para bloquear si no hay usuario -->
             <% if (userLogIn) { %>
                 <a class="<%= title.includes('PERFIL') ? 'active' : null %>" href="/usuario">Mi perfil</a>
+                <a class="<%= title.includes('MIS') ? 'active' : null %>" href="/recetas-del-usuario">Mis recetas</a>
                 <a class="<%= title.includes('NUEVA') ? 'active' : null %>" href="/nueva-receta">Nueva receta</a>
                 <a href="/salir">Salir</a>
             <% } else { %>

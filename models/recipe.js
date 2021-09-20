@@ -8,6 +8,7 @@ const recipeSchema = new mongoose.Schema({
     rations: {type: String, require: true},
     ingredients: {type: Array, require: true},
     steps: {type: Array, require: true},
+    userId: {type: mongoose.Types.ObjectId, ref: "user"}
 })
 
 const Recipe = mongoose.model('Recipe', recipeSchema);

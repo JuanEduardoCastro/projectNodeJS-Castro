@@ -2,9 +2,10 @@
 <%-  include('partials/header.ejs') %> 
 
 
+    <% let titleOrError = errorMessage ? errorMessage : 'Agrega tu receta y compártela en' %>
         <div class="newRecipeBox">
             <div class="newRecipeTitle">
-                <h2>Agrega tu receta y compártela en  <span>COMUNIDAD COCINERA</span></h2>
+                <h2><%= titleOrError %>  <span><%= !errorMessage ? 'COMUNIDAD COCINERA' : null %></span></h2>
             </div>
             <form action="/nueva-receta" method="POST">
                 <div class="newRecipeLeftSide">
@@ -115,40 +116,9 @@
                     </div>                  
                 </div>
                 <div class="newRecipeButton">
-                    <input type="submit" value="send" />
+                    <input type="submit" value="Enviar" />
                 </div>
             </form>
         </div>
 
 <%-  include('partials/footer.ejs') %> 
-
-
-
-
-<!-- <div class="ingredientsLine">
-        <label for="ingredients" >Ingrediente:</label>
-        <input type="number" name="ingredients" id="ingredients" pattern="^[0-9]+" required/>
-        <select name="ingredients">
-            <option value=""> -- </option>
-            <option value="unit">Unidad</option>
-            <option value="spoon">Crdas</option>
-            <option value="cup">Tzs</option>
-            <option value="grams">Grms</option>
-            <option value="ounce">Ozs</option>
-        </select>
-        <input type="text" name="ingredients" id="ingredients" required/>
-    </div> -->
-
-    <!-- <div class="newRecipeIngredients">
-        <label for="ingredients" >Ingrediente:</label>
-        <input type="number" name="ingredients" id="ingredients" pattern="^[0-9]+" required/>
-        <select name="ingredients">
-            <option value=""> -- </option>
-            <option value="unit">Unidad</option>
-            <option value="spoon">Crdas</option>
-            <option value="cup">Tzs</option>
-            <option value="grams">Grms</option>
-            <option value="ounce">Ozs</option>
-        </select>
-        <input type="text" name="ingredients" id="ingredients" required/>
-    </div> -->

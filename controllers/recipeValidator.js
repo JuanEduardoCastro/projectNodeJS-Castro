@@ -42,24 +42,24 @@ const RecipeValidator = (req, res, next) => {
     if (!validations.error) {
         next()
     } else {
-        console.log("error validacion")
-        //  if (!req.query.edit) {
-        //      res.render('newUser', {
-        //          title: 'REGISTRO',
-        //          userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-        //         validationsError: validations.error ? validations.error.details[0] : false
-        //      })
-        //  } else {
-        //      console.log(req.body)
-        //      res.render('user', {
-        //          title: 'REGISTRO',
-        //         userProfile: {eMail: req.session.eMail, name: req.body.name, lastName: req.body.lastName, photo: req.body.photo, job: req.body.job, country: req.body.country},
-        //          editUser: false,
-        //          userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-        //          validationsError: validations.error ? validations.error.details[0] : false
-        //      })
-        //  }
+        if (!req.query.edit) {
+            res.render('newRecipe', {
+                title: 'NUEVA RECETA',
+                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                validationsError: validations.error ? validations.error.details[0] : false,
+                errorMessage: null
+            })
+        } else {
+            res.render('recipe', {
+                title: 'MI RECETA',
+                recipeProfile: {recipePhoto: req.body.recipePhoto, recipeTitle: req.body.recipeTitle, description: req.body.description, duration: req.body.duration, rations: req.body.rations, ingredients: req.body.ingredients, steps: req.body.steps},
+                editRecipe: false,
+                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                validationsError: validations.error ? validations.error.details[0] : false,
+                errorMessage: null
+            })
+        }
     }
 }
 
-module.exports = recipeValidator;
+module.exports = RecipeValidator;
