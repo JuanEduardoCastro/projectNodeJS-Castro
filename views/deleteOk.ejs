@@ -1,0 +1,33 @@
+<%-  include('partials/head.ejs') %> 
+<%-  include('partials/header.ejs') %> 
+
+    <% let className = errorMessage ? 'errorMessage' : 'errorMessageHidden' %>
+        <div class="newUserBox">
+            <div class="newUserTitle">
+                <h2>Tu </h2> 
+            </div>
+            <div class=<%= className %>>
+                <p><%= errorMessage %></p>
+            </div>
+            <form action="/" method="POST">
+                <div>
+                </div>
+                <div>
+                </div>
+                <div>
+                </div>  
+                <div>
+                </div>
+                <div>
+                </div>
+                <div class="newUserSelect"> 
+                </div>
+                <div class="newUserSelect">
+                </div>
+                <div class="newUserButton">
+                    <a href="/"><input type="button" value="Volver home" /></a>
+                </div>    
+            </form>
+        </div>
+   
+<%-  include('partials/footer.ejs') %> 

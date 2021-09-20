@@ -24,6 +24,12 @@ router.route('/editar-receta/:id')
 .get(recipesControllers.editRecipe)
 // .post(recipesControllers.sendEditRecipe)
 
+router.route('/confirmacion-eliminar-receta/:id')
+.get(recipesControllers.deleteRecipe)
+
+router.route('/eliminar-receta/:id')
+.post(recipesControllers.deleteRecipe)
+
 // USERS
 router.route('/nuevo-usuario')
 .get(usersControllers.newUser)

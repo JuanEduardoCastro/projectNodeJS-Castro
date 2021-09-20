@@ -398,7 +398,29 @@ main {
     text-align: center;
 }
 
+.newRecipeBox .newRecipeTitleButton {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.newRecipeBox .newRecipeTitleButton > a {
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 5px;
+    text-decoration: none; 
+}
+
+.newRecipeBox .newRecipeTitleButton > a p {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
 .newRecipeBox form {
+    position: relative;
     width: 95%;
     display: flex;
     flex-direction: column;
@@ -452,6 +474,11 @@ main {
     padding: 0 0.5rem;
 } 
 
+.newRecipeIngredients, .newRecipeSteps {
+    display: flex;
+    flex-direction: column;
+}
+
 .newRecipeIngredients .ingredientsLine {
     width: 100%;
     display: flex;
@@ -460,26 +487,55 @@ main {
     gap: 0.8rem;
 }
 
-.newRecipeBox .ingredientsLine > input[type="number"] {
-    width: 8%;
+.newRecipeSteps .stepsLine {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.newRecipeSteps .stepsLine > p {
+    width: 55%;
+    text-align: justify;
+}
+
+.newRecipeSteps .stepsLine > input[type="text"] {
+    width: 60% !important;
 }
 
 .newRecipeIngredients .ingredientsLine > input[type="text"] {
-    width: 34% !important; 
+    width: 60% !important; 
 }
 
-.newRecipeButton {
-    width: 100%;
+.newRecipeBox .newRecipeButton {
+    width: 80%;
     height: 5vh;
     display: flex;
     justify-content: center;
+    margin: 0 auto;
 } 
 
+.newRecipeBox form div a {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    text-decoration: none; 
+}
 
-.newRecipeButton input[type="submit"] {
+.newRecipeBox form div a > input[type="button"] {
     width: 40%;
     height: 100%;
-    margin-left: 10vw;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+.newRecipeBox form div > input[type="submit"] {
+    width: 18%;
+    height: 100%;
+    font-size: 20px;
+    border-radius: 5px;
 }
 
 

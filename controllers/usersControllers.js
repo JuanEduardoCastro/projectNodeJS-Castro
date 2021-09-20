@@ -114,6 +114,7 @@ const usersControllers = {
                         await User.findOneAndDelete({ _id: req.session._id, })
                         req.session.destroy(() => {
                             res.redirect('/')
+                            //mandar a deleteOk
                         })
                     } else {
                         throw new Error()
