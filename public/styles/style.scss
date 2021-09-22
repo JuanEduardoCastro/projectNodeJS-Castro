@@ -1,0 +1,327 @@
+html * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* variables */
+
+$text-color: #37004b;
+$box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+$box-color: #ab3bff;
+
+/* extend */
+
+%bg-relative {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0,0,0,0.75);
+}
+
+%bg-absolute {
+    content: "";
+    position: absolute;
+    background-size: cover;
+    background-position: fixed;
+    background-attachment: fixed;
+    opacity: 0.6;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    z-index: -1;
+}
+
+%box-sketch {
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: $box-shadow;
+}
+
+%btn-sketch {
+    background-color: $box-color;
+    width: 12rem;
+    height: 2.5rem;
+    border-radius: 5px;
+    font-family: "open sans";
+    font-weight: 600;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+
+
+/* basics */
+
+body {
+    font-family: "open sans";
+}
+
+header {
+    background-color: white;
+    width: 100%;
+    height: 15vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10vw;
+    border-bottom: 1px solid lightgray;
+    box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+
+        h1 {
+            color: $text-color;
+        }
+        
+        nav {
+            a {
+                color:$text-color;
+                font-weight: 600;
+                text-decoration: none;
+                font-size: 25px;
+                margin-right: 2vw;
+            }
+        }
+}
+
+main {
+    width: 85%;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2rem;
+}
+
+footer {
+    background-color: white;    
+    width: 100%;
+    height: 15vh;
+    padding: 0 5vw;
+    border-top: 1px solid lightgray;
+    font-size: 12px;
+
+    div:nth-child(1) {
+        width: 100%;
+        height: 10vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+            width: 40%;
+            height: 6vh;
+            display: flex; 
+            justify-content: flex-start;
+            align-items: flex-end;
+            gap: 0.8;
+
+            h2 {
+                margin-left: 0.5vw;
+            }
+        }
+
+        nav {
+            a {
+                color: $text-color;
+                font-weight: 600;
+                text-decoration: none;
+                margin-right: 2vw;
+                font-size: 18px;
+            }
+        }
+    }
+
+    div:nth-child(2) {
+        background-color: lightblue;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.active {
+    text-decoration: underline !important;
+}
+
+/* HOME */
+
+.HOME {
+    @extend %bg-relative;
+}
+
+.HOME::after {
+    @extend %bg-absolute;
+    background-image: url('../assets/Utencilios-cocina3.jpg');
+}
+
+.homeInfo {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+
+    p {
+        font-size: 26px;
+        font-weight: 600;
+        color: white;
+    }
+
+    span {
+        font-size: 28px;
+    }
+}
+
+.homeActions {
+    width: 90%;
+    height: 35vh;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+
+    .homeHero {
+        @extend %box-sketch;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 2rem;
+        gap: 2rem;
+
+        p {
+            font-size: 20px;
+            text-align: justify;
+        }
+
+        button {
+            @extend %btn-sketch;
+        }
+
+        button:active {
+            transform: scale(0.9);
+            transition: transform 0.2s ease-in;
+        }
+    }
+
+    .homeLogin {
+        @extend %box-sketch;
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 2rem;
+        gap: 2rem;
+
+        p {
+            font-size: 20px;
+            text-align: justify;
+        }
+
+        button {
+            @extend %btn-sketch;
+        }
+
+        button:active {
+            transform: scale(0.9);
+            transition: transform 0.2s ease-in;
+        }
+    }
+}
+
+
+/* NEW USER */
+
+.newUserBox {
+    @extend %box-sketch;
+    width: 60%;
+    min-height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 3rem 0;
+    gap: 2rem;
+
+    .newUserTitle {
+        width: 75%;
+        text-align: center;
+    }
+
+    /* revisar para que quede el espacio */
+    .errorMessage {
+        color: red;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .errorMessageHidden {
+        visibility: hidden;
+    }
+
+    .newUserTitleButton {
+        width: 70%;
+        display: flex;
+        justify-content: flex-end;
+
+        a {
+            display: flex;
+            justify-content: flex-end;
+            border-radius: 5px;
+            text-decoration: none; 
+
+            p {
+                width: 100%;
+                height: 100%;
+                border-radius: 5px;
+                font-size: 18px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    form {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.3rem;
+
+        div {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 0.8rem;
+
+            label {
+                width: 40%;
+                text-align: right;
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            input {
+                width: 60%;
+                height: 5vh;
+                font-size: 18px;
+                border: 1px solid #37004b;
+                border-radius: 5px;
+                padding: 1rem 0.5rem;
+            }
+
+            input:focus {
+                outline: 1px solid transparent;
+                box-shadow: $box-shadow;
+            }
+
+            select {
+                display: flex;
+                align-items: center;
+            }
+        }
+    }
+
+}

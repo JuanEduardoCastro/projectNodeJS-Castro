@@ -6,9 +6,22 @@
             <h2>COCINERA</h2>    
         </div>
         <nav>
-            <a href="/">Home</a>
+            <a class="<%= title.includes('HOME') ? 'active' : null %>" href="/">Home</a>
+            <a class="<%= title.includes('RECETARIO') ? 'active' : null %>" href="/recetas">Recetas</a>
+
+            <!-- para bloquear si no hay usuario -->
+            <% if (userLogIn) { %>
+                <a class="<%= title.includes('PERFIL') ? 'active' : null %>" href="/usuario">Mi perfil</a>
+                <a class="<%= title.includes('MIS') ? 'active' : null %>" href="/recetas-del-usuario">Mis recetas</a>
+                <a class="<%= title.includes('NUEVA') ? 'active' : null %>" href="/nueva-receta">Nueva receta</a>
+                <a href="/salir">Salir</a>
+            <% } else { %>
+                <a class="<%= title.includes('INGRESO') ? 'active' : null %>" href="/ingreso">Ingresar</a>
+                <a class="<%= title.includes('REGISTRO') ? 'active' : null %>" href="/nuevo-usuario">Registrarse</a>
+            <% } %>
+            <!-- <a href="/">Home</a>
             <a href="/recetas">Recetas</a>
-            <a href="/">Login</a>
+            <a href="/">Login</a> -->
         </nav>
     </div>
     <div>
@@ -16,5 +29,6 @@
     </div>
 
 </footer>
+<script src="../../public/script.js" ></script>
 </body>
 </html>
