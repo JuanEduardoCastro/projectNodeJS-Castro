@@ -40,6 +40,15 @@ $box-color: #ab3bff;
     box-shadow: $box-shadow;
 }
 
+%input-sketch {
+    width: 60%;
+    height: 5vh;
+    font-size: 18px;
+    border: 1px solid $text-color;
+    border-radius: 5px;
+    padding: 0.3rem 0.5rem;
+}
+
 %btn-sketch {
     background-color: $box-color;
     width: 12rem;
@@ -49,6 +58,28 @@ $box-color: #ab3bff;
     font-weight: 600;
     font-size: 1.2rem;
     cursor: pointer;
+}
+
+%a-button-sketch {
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+
+    a {
+        display: flex;
+        justify-content: flex-end;
+        border-radius: 5px;
+        text-decoration: none; 
+
+        p {
+            width: 100%;
+            height: 100%;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
 }
 
 
@@ -234,7 +265,34 @@ footer {
 }
 
 
-/* NEW USER */
+/* NEW USER, USER, EDIT USER, LOGIN */
+
+.REGISTRO {
+    @extend %bg-relative;
+}
+
+.REGISTRO::after {
+    @extend %bg-absolute;
+    background-image: url('../assets/mesa-comida3.jpg');
+}
+
+.PERFIL {
+    @extend %bg-relative;
+}
+
+.PERFIL::after {
+    @extend %bg-absolute;
+    background-image: url('../assets/Utencilios-cocina2.jpg');
+}
+
+.INGRESO {
+    @extend %bg-relative;
+}
+
+.INGRESO::after {
+    @extend %bg-absolute;
+    background-image: url('../assets/mesa-comida3.jpg');
+}
 
 .newUserBox {
     @extend %box-sketch;
@@ -264,24 +322,7 @@ footer {
     }
 
     .newUserTitleButton {
-        width: 70%;
-        display: flex;
-        justify-content: flex-end;
-
-        a {
-            display: flex;
-            justify-content: flex-end;
-            border-radius: 5px;
-            text-decoration: none; 
-
-            p {
-                width: 100%;
-                height: 100%;
-                border-radius: 5px;
-                font-size: 18px;
-                font-weight: 600;
-            }
-        }
+        @extend %a-button-sketch;
     }
 
     form {
@@ -294,6 +335,7 @@ footer {
             width: 100%;
             display: flex;
             justify-content: space-between;
+            align-items: center;
             gap: 0.8rem;
 
             label {
@@ -304,12 +346,7 @@ footer {
             }
 
             input {
-                width: 60%;
-                height: 5vh;
-                font-size: 18px;
-                border: 1px solid #37004b;
-                border-radius: 5px;
-                padding: 1rem 0.5rem;
+                @extend %input-sketch;
             }
 
             input:focus {
@@ -318,10 +355,143 @@ footer {
             }
 
             select {
+                @extend %input-sketch;
                 display: flex;
                 align-items: center;
             }
+
+            select:focus {
+                outline: 1px solid transparent;
+                box-shadow: $box-shadow;
+            }
+
+            input[type="submit"] {
+                width: 40%;
+                height: 5vh;
+            }
+
+            h3 {
+                height: 5vh;
+                font-size: 18px;
+            }
+        }
+
+        .newUserButton {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
         }
     }
 
 }
+
+/* RECIPES */
+
+.RECETARIO {
+    @extend %bg-relative;
+}
+
+.RECETARIO::after {
+    @extend %bg-absolute;
+    background-image: url('../assets/cocina.jpg');
+}
+
+.RECETAS {
+    @extend %bg-relative;
+}
+
+.RECETAS::after {
+    @extend %bg-absolute;
+    background-image: url('../assets/cocina.jpg');
+}
+
+.recipesBox {
+    width: 90%;
+    min-height: 100vh;
+    margin: 0 auto;
+
+    .recipesBoxTitle {
+        width: 80%;
+        margin: 0 auto;
+        font-size: 30px;
+        font-weight: 600;
+        text-align: center;
+        color: white;
+    }
+
+    .recipeCard {
+        @extend %box-sketch;
+        width: 70%;
+        min-height: 100vh;
+        margin: 5rem auto;
+
+        .recipeCardPhoto {
+            background-color: lightgray;
+            background-size: cover;
+            background-position: cover;
+            border-radius: 10px;
+            width: 100%;
+            height: 55vh;
+        }
+
+        .recipeCardBody {
+            background-color: white;
+            border-radius: 8px;
+            width: 100%;
+            min-height: 60vh;
+            margin: 0 auto; 
+
+            div {
+                font-size: 18px;
+                margin: 0.5vh 0;
+                padding: 1.2vh 1.5vw;
+
+                h4 {
+                    font-size: 20px;
+                    margin: 1vh 1.5rem;
+                }
+            }
+
+            div:nth-child(1) {
+                text-align: center;
+                font-size: 24px;
+                font-weight: 600;
+                border-bottom: 1px solid lightgray;
+            }
+            
+            div:nth-child(3) {
+                display: flex;
+                justify-content: space-between;
+                padding: 1vh 8vw;
+                border-top: 1px solid lightgray;
+                border-bottom: 1px solid lightgray;
+            }
+
+            div:nth-child(4) {
+                border-bottom: 1px solid lightgray;
+            }
+
+            div:nth-child(5) {
+                text-align: justify;
+            }
+        }
+
+        .recipeCardEditButton {
+            @extend %a-button-sketch;
+        }
+    }
+}
+
+
+/* NEW RECIPE */
+
+.NUEVA {
+    @extend %bg-relative;
+}
+
+.NUEVA::after {
+    @extend %bg-absolute;
+    background-image: url('../assets/Utencilios-cocina.jpg');
+}
+

@@ -8,7 +8,14 @@
                 <h2>Bienvenido a la <span>COMUNIDAD COCINERA</span></h2>
             </div>
             <div class="newUserTitleButton">
-                <a href="/editar-usuario" ><p>Editar perfil</p></a>
+                <% if (editUser === false) { %>
+                    <a href="/editar-usuario" ><p>Editar perfil</p></a>
+                <% } else { %>
+                    <a href="/usuario"><p>Cancelar</p></a>
+                    <a href="/confirmacion-eliminar-usuario"><p>Eliminar</p></a>
+                    <a href="/editar-usuario" ><p>Editar perfil</p></a>
+                <% } %>
+
             </div>
             <div class=<%= className %>>
                 <p><%= validationsError.message %></p>
@@ -88,9 +95,7 @@
                     <div></div>
                 <% } else { %>
                     <div class="newUserButton">
-                        <a href="/usuario"><input type="button" value="Cancelar" /></a>
                         <input type="submit" value="Enviar" />
-                        <a href="/confirmacion-eliminar-usuario"><input type="button" value="Eliminar" /></a>
                     </div>
                 <% } %>
              </form>

@@ -7,14 +7,14 @@ html * {
 
 /* variables */
 /* extend */
-.HOME {
+.HOME, .REGISTRO, .PERFIL, .INGRESO, .RECETARIO, .RECETAS, .NUEVA {
   position: relative;
   width: 100%;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-.HOME::after {
+.HOME::after, .REGISTRO::after, .PERFIL::after, .INGRESO::after, .RECETARIO::after, .RECETAS::after, .NUEVA::after {
   content: "";
   position: absolute;
   background-size: cover;
@@ -28,12 +28,21 @@ html * {
   z-index: -1;
 }
 
-.homeActions .homeHero, .homeActions .homeLogin, .newUserBox {
+.homeActions .homeHero, .homeActions .homeLogin, .newUserBox, .recipesBox .recipeCard {
   background-color: white;
   border: 1px solid lightgray;
   border-radius: 5px;
   -webkit-box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
           box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+}
+
+.newUserBox form div input, .newUserBox form div select {
+  width: 60%;
+  height: 5vh;
+  font-size: 18px;
+  border: 1px solid #37004b;
+  border-radius: 5px;
+  padding: 0.3rem 0.5rem;
 }
 
 .homeActions .homeHero button, .homeActions .homeLogin button {
@@ -45,6 +54,36 @@ html * {
   font-weight: 600;
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+.newUserBox .newUserTitleButton, .recipesBox .recipeCard .recipeCardEditButton {
+  width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  gap: 2rem;
+}
+
+.newUserBox .newUserTitleButton a, .recipesBox .recipeCard .recipeCardEditButton a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.newUserBox .newUserTitleButton a p, .recipesBox .recipeCard .recipeCardEditButton a p {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 /* basics */
@@ -275,7 +314,19 @@ footer div:nth-child(2) {
   transition: transform 0.2s ease-in, -webkit-transform 0.2s ease-in;
 }
 
-/* NEW USER */
+/* NEW USER, USER, EDIT USER, LOGIN */
+.REGISTRO::after {
+  background-image: url("../assets/mesa-comida3.jpg");
+}
+
+.PERFIL::after {
+  background-image: url("../assets/Utencilios-cocina2.jpg");
+}
+
+.INGRESO::after {
+  background-image: url("../assets/mesa-comida3.jpg");
+}
+
 .newUserBox {
   width: 60%;
   min-height: 45vh;
@@ -312,35 +363,6 @@ footer div:nth-child(2) {
   visibility: hidden;
 }
 
-.newUserBox .newUserTitleButton {
-  width: 70%;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-}
-
-.newUserBox .newUserTitleButton a {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
-  border-radius: 5px;
-  text-decoration: none;
-}
-
-.newUserBox .newUserTitleButton a p {
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  font-size: 18px;
-  font-weight: 600;
-}
-
 .newUserBox form {
   width: 70%;
   display: -webkit-box;
@@ -361,6 +383,9 @@ footer div:nth-child(2) {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   gap: 0.8rem;
 }
 
@@ -369,15 +394,6 @@ footer div:nth-child(2) {
   text-align: right;
   font-size: 18px;
   font-weight: 600;
-}
-
-.newUserBox form div input {
-  width: 60%;
-  height: 5vh;
-  font-size: 18px;
-  border: 1px solid #37004b;
-  border-radius: 5px;
-  padding: 1rem 0.5rem;
 }
 
 .newUserBox form div input:focus {
@@ -393,5 +409,122 @@ footer div:nth-child(2) {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.newUserBox form div select:focus {
+  outline: 1px solid transparent;
+  -webkit-box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
+}
+
+.newUserBox form div input[type="submit"] {
+  width: 40%;
+  height: 5vh;
+}
+
+.newUserBox form div h3 {
+  height: 5vh;
+  font-size: 18px;
+}
+
+.newUserBox form .newUserButton {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 2rem;
+}
+
+/* RECIPES */
+.RECETARIO::after {
+  background-image: url("../assets/cocina.jpg");
+}
+
+.RECETAS::after {
+  background-image: url("../assets/cocina.jpg");
+}
+
+.recipesBox {
+  width: 90%;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+.recipesBox .recipesBoxTitle {
+  width: 80%;
+  margin: 0 auto;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  color: white;
+}
+
+.recipesBox .recipeCard {
+  width: 70%;
+  min-height: 100vh;
+  margin: 5rem auto;
+}
+
+.recipesBox .recipeCard .recipeCardPhoto {
+  background-color: lightgray;
+  background-size: cover;
+  background-position: cover;
+  border-radius: 10px;
+  width: 100%;
+  height: 55vh;
+}
+
+.recipesBox .recipeCard .recipeCardBody {
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  min-height: 60vh;
+  margin: 0 auto;
+}
+
+.recipesBox .recipeCard .recipeCardBody div {
+  font-size: 18px;
+  margin: 0.5vh 0;
+  padding: 1.2vh 1.5vw;
+}
+
+.recipesBox .recipeCard .recipeCardBody div h4 {
+  font-size: 20px;
+  margin: 1vh 1.5rem;
+}
+
+.recipesBox .recipeCard .recipeCardBody div:nth-child(1) {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  border-bottom: 1px solid lightgray;
+}
+
+.recipesBox .recipeCard .recipeCardBody div:nth-child(3) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1vh 8vw;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+
+.recipesBox .recipeCard .recipeCardBody div:nth-child(4) {
+  border-bottom: 1px solid lightgray;
+}
+
+.recipesBox .recipeCard .recipeCardBody div:nth-child(5) {
+  text-align: justify;
+}
+
+/* NEW RECIPE */
+.NUEVA::after {
+  background-image: url("../assets/Utencilios-cocina.jpg");
 }
 /*# sourceMappingURL=style.css.map */
