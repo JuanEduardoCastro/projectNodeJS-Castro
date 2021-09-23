@@ -1,16 +1,12 @@
 const express = require('express');
 const router = require('./routes/index');
 const session = require('express-session');
-const mongo = require('connect-mongodb-session')(session);
 require('dotenv').config();
-
-const store = new mongo({
-    uri: process.env.MONGODB,
-    collection: 'sessions',
-})
-const passport = require('passport');
-require('./config/database');
-require('./config/passport');
+const db = require('./config/db');
+const Recipe = require('./models/Recipe');
+const User = require('./models/User');
+const Ingredient = require('./models/Ingredient');
+const Step = require('./models/Step');
 
 const app = express();
 
@@ -23,9 +19,33 @@ app.use(session({
     saveUninitialized: false,
     store: store
 }));
-app.use(passport.initialize());
-app.use(passport.session());
 
-app.use('/', router);
+//usuario tiene muchas recetas
+Recipe.belongsTo(User)
+User.hasMany(Recipe)
 
-app.listen(process.env.PORT || 4000, process.env.HOST || '0.0.0.0', () => console.log('Server listening on port 4000'));
+//receta tiene muchos ingredientes
+Ingredient.belongsTo(Recipe)
+Recipe.hasMany(Ingredient)
+
+//receta tiene muchos pasos
+Step.belongsTo(Recipe)
+Recipe.hasMany(Step)
+
+//receta tiene muchsos likes de muchos usuarios
+//usuario tiene muchos likes a muchas recetas
+User.belongsToMany(Recipe, { through: 'likes' })
+Recipe.hasMany(Recipe, { through: 'likes' })
+
+//revisar ? ? 
+User.belongsToMany(Recipe, { through: 'comments' })
+Recipe.hasMany(Recipe, { through: 'comments' })
+
+
+
+
+db.sync()
+.then(() => {
+    app.use('/', router);
+    app.listen(process.env.PORT || 4000, process.env.HOST || '0.0.0.0', () => console.log('Server listening on port 4000'));
+})
