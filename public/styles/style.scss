@@ -82,6 +82,11 @@ $box-color: #ab3bff;
     }
 }
 
+%focus-sketch {
+    outline: 1px solid transparent;
+    box-shadow: $box-shadow;
+}
+
 
 
 /* basics */
@@ -350,8 +355,7 @@ footer {
             }
 
             input:focus {
-                outline: 1px solid transparent;
-                box-shadow: $box-shadow;
+                @extend %focus-sketch;
             }
 
             select {
@@ -361,8 +365,7 @@ footer {
             }
 
             select:focus {
-                outline: 1px solid transparent;
-                box-shadow: $box-shadow;
+                @extend %focus-sketch;
             }
 
             input[type="submit"] {
@@ -494,4 +497,89 @@ footer {
     @extend %bg-absolute;
     background-image: url('../assets/Utencilios-cocina.jpg');
 }
+
+.newRecipeBox {
+    @extend %box-sketch;
+    width: 95%;
+    min-height: 45vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 3rem 0;
+    gap: 2rem;
+
+    .mewRecipeTitle {
+        width: 75%;
+        text-align: center;
+    }
+
+/*     .newRecieTitleButton {
+
+    } */
+
+    form {
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.3rem;
+
+        .newRecipeForm {
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            div {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                gap: 0.8rem; 
+
+                label {
+                    width: 40%;
+                    text-align: right;
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+
+                input {
+                    @extend %input-sketch;
+                }
+
+                input:focus {
+                    @extend %focus-sketch;
+                }
+
+                .newRecipeIngredients {
+                    background-color: lightgray;
+                    .ingredientsLine {
+                        input {
+                            width: 66%;
+                        }
+                    }
+                    
+                    /* select {
+                        @extend %input-sketch;
+                    } */
+                }
+            }   
+        }
+
+        /* revisar tamaño boton */
+        .newRecipeButton {
+            width: 50%;             
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem auto;
+
+            input {
+                @extend %input-sketch;
+            }
+        }
+    }
+}
+
 

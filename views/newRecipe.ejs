@@ -7,7 +7,7 @@
                 <h2><%= titleOrError %>  <span><%= !errorMessage ? 'COMUNIDAD COCINERA' : null %></span></h2>
             </div>
             <form action="/nueva-receta" method="POST">
-                <div class="newRecipeLeftSide">
+                <div class="newRecipeForm">
                     <div>
                         <label for="recipePhoto" >Sube un URL de la foto:</label>
                         <input type="text" name="recipePhoto" id="recipePhoto" required/>
@@ -28,57 +28,22 @@
                         <label for="rations" >Raciones:</label>
                         <input type="text" name="rations" id="rations" required/>
                     </div>
-
                     <div class="newRecipeIngredients">
-
                         <div class="ingredientsLine">
                             <button>+</button>
                             <label for="ingredients" >Ingrediente:</label>
                             <input type="text" name="ingredients" id="ingredients" />
                         </div>
-                        
+                        <div class="ingredientsLine">
+                            <input type="text" name="ingredients" id="ingredients" />
+                        </div>
+
                     </div>
                     <div class="newRecipeSteps">
                         <div class="stepsLine">
                             <label for="steps" >Procedimiento:</label>
                             <input type="text" name="steps" id="steps" />
                         </div>                   
-                        <div class="stepsLine">
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div>                   
-                        <div class="stepsLine">
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div>                   
-                        <div class="stepsLine">
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div>                   
-                        <div class="stepsLine">
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div>                   
-                        <div class="stepsLine">
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div>                   
-                        <div class="stepsLine">
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div>                   
-                        <div class="stepsLine">
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div>                   
-                        <div class="stepsLine"> 
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div>                   
-                        <div class="stepsLine">
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div> 
                     </div>                  
                 </div>
                 <div class="newRecipeButton">
