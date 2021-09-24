@@ -1,7 +1,6 @@
 const joi = require('joi');
 
 const userValidator = (req, res, next) => {
-
     const schema = joi.object({
         eMail: joi.string().trim().min(6).max(80).email().empty('').messages({
             'string.email': 'El correo electrónico debe ser valido',
@@ -52,7 +51,7 @@ const userValidator = (req, res, next) => {
         } else {
             res.render('user', {
                 title: 'REGISTRO',
-                userProfile: {eMail: req.session.eMail, name: req.body.name, lastName: req.body.lastName, photo: req.body.photo, job: req.body.job, country: req.body.country},
+                userProfile: {eMail: req.session.eMail, firstName: req.body.firstName, lastName: req.body.lastName, photo: req.body.photo, job: req.body.job, country: req.body.country},
                 editUser: false,
                 userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
                 validationsError: validations.error ? validations.error.details[0] : false

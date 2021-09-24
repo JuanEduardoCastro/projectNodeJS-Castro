@@ -2,11 +2,36 @@ const express = require('express');
 const router = require('./routes/index');
 const session = require('express-session');
 require('dotenv').config();
+const Sequelize = require('sequelize');
 const db = require('./config/db');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-// const dbStore = db('project_node', 'root', '', {
-//     store: SequelizeStore,
+
+// db.define('Session', {
+//     sid: {
+//         type: Sequelize.STRING,
+//         primaryKey: true,
+//     },
+//     id: Sequelize.STRING,
+//     userName: Sequelize.STRING,
+//     eMail: Sequelize.STRING,
+//     photo: Sequelize.STRING,
+//     expires: Sequelize.STRING,
+//     data: Sequelize.STRING,
 // })
+// const extendDefaultFields = (defaults, session) => {
+//     return {
+//         data: defaults.data,
+//         expires: defaults.expires,
+//         id: session.userId,
+//         userName: session.userName,
+//         eMail: session.eMail,
+//         photo: session.photo
+//     }
+
+// }
+const dbStore = new SequelizeStore({
+    db: db,
+})
 // const Recipe = require('./models/Recipe');
 // const User = require('./models/User');
 // const Ingredient = require('./models/Ingredient');
@@ -21,7 +46,7 @@ app.use(session({
     secret: process.env.SECRETKEY,
     resave: false,
     saveUninitialized: false,
-    // store: dbStore,
+    store: dbStore,
 }));
 
 // //usuario tiene muchas recetas
@@ -44,9 +69,6 @@ app.use(session({
 // //revisar ? ? 
 // User.belongsToMany(Recipe, { through: 'comments' })
 // Recipe.hasMany(Recipe, { through: 'comments' })
-
-
-
 
 db.sync()
 .then(() => {
