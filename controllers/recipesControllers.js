@@ -1,5 +1,4 @@
-const path = require('path');
-const Recipe = require('../models/recipe')
+const Recipe = require('../models/Recipe')
 
 const recipesControllers = {
     home: (req, res) => {

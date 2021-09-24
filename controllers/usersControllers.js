@@ -1,5 +1,4 @@
-const path = require('path');
-const User = require('../models/user');
+const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 
 const usersControllers = {
@@ -12,73 +11,99 @@ const usersControllers = {
     },
 
     sendNewUser: async (req, res) => {
-        const {eMail, password, name, lastName, photo, job, country} = req.body
+        console.log(req.body)
+        const {eMail, password, firstName, lastName, photo, job, country} = req.body
         let newUser 
-        if (req.query.edit) {
-            newUser = await User.findOne({ _id: req.session._id })
-            newUser.name = name
-            newUser.lastName = lastName
-            newUser.photo = photo
-            newUser.job = job
-            newUser.country = country
-        } else {
-            let hashPassword = bcrypt.hashSync(password)
-            newUser = new User({
-                eMail, password: hashPassword, name, lastName, photo, job, country
-            })
-            try {
-                let userCheck = await User.findOne({ eMail: eMail })
-                if (userCheck) {
-                    throw new Error()
-                }
-            } catch (error) {
-                res.render('newUser', {
-                    title: 'REGISTRO',
-                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                    validationsError: {message: 'El correo electrónico ya está registrado.'},
-                })
-                return error
-            }
-        }
+        let hashPassword = bcrypt.hashSync(password)
         try {
-            await newUser.save()
-            if (req.query.edit) {
-                res.redirect('/usuario')
+            let userCheck = await User.findAll({ where: { eMail: eMail}, raw: true })
+            if (userCheck.length == 0) {
+                newUser = await User.create({
+                eMail, password: hashPassword, firstName, lastName, photo, job, country
+                })
             } else {
-                res.redirect('/ingreso')
+                throw new Error()
             }
-        } catch (error) {
             res.render('newUser', {
                 title: 'REGISTRO',
                 userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                validationsError: {message: 'Hubo un problema con la base de datos. Intentetelo mas tarde.'},
+                validationsError: null,
+            })
+        } catch (err) {
+            res.render('newUser', {
+                title: 'REGISTRO',
+                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                validationsError: {message: 'El correo electrónico ya está registrado.'},
             })
         }
+        // if (req.query.edit) {
+        //     newUser = await User.findOne({ _id: req.session._id })
+        //     newUser.name = name
+        //     newUser.lastName = lastName
+        //     newUser.photo = photo
+        //     newUser.job = job
+        //     newUser.country = country
+        // } else {
+        //     let hashPassword = bcrypt.hashSync(password)
+        //     newUser = new User({
+        //         eMail, password: hashPassword, name, lastName, photo, job, country
+        //     })
+        //     try {
+        //         let userCheck = await User.findOne({ eMail: eMail })
+        //         if (userCheck) {
+        //             throw new Error()
+        //         }
+        //     } catch (error) {
+        //         res.render('newUser', {
+        //             title: 'REGISTRO',
+        //             userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+        //             validationsError: {message: 'El correo electrónico ya está registrado.'},
+        //         })
+        //         return error
+        //     }
+        // }
+        // try {
+        //     await newUser.save()
+        //     if (req.query.edit) {
+        //         res.redirect('/usuario')
+        //     } else {
+        //         res.redirect('/ingreso')
+        //     }
+        // } catch (error) {
+        //     res.render('newUser', {
+        //         title: 'REGISTRO',
+        //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+        //         validationsError: {message: 'Hubo un problema con la base de datos. Intentetelo mas tarde.'},
+        //     })
+        // }
     },
 
     getUser: async (req, res) => {
-        if (req.session.userLogIn) {
-            try {
-                const userProfile = await User.findOne({ _id: req.session._id })
-                if (userProfile) {
-                    res.render('user', {
-                        title: 'MI PERFIL',
-                        userProfile, 
-                        editUser: false,
-                        userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                        validationsError: false        
-                    })
-                } else {
-                    throw new Error()
-                }
-            } catch (error) {
-                req.session.destroy(() => {
-                    res.redirect('/')
-                })
-            }
-        } else {
-            res.redirect('/')
-        } 
+        // try {
+        //     const userProfile = await User.findByPk(req.)
+        // }
+        // if (req.session.userLogIn) {
+        //     try {
+        //         const userProfile = await User.findOne({ _id: req.session._id })
+        //         if (userProfile) {
+        //             res.render('user', {
+        //                 title: 'MI PERFIL',
+        //                 userProfile, 
+        //                 editUser: false,
+        //                 userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+        //                 validationsError: false        
+        //             })
+        //         } else {
+        //             throw new Error()
+        //         }
+        //     } catch (error) {
+        //         req.session.destroy(() => {
+        //             res.redirect('/')
+        //         })
+        //     }
+        // } else {
+        //     res.redirect('/')
+        // } 
     },
 
     editUser: async (req, res) => {

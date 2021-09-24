@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db = required('../config/db');
+const db = require('../config/db');
 
 const User = db.define('User', {
     id: {
@@ -33,7 +33,7 @@ const User = db.define('User', {
         type: Sequelize.STRING, 
         allowNull: false
     },
-    Country: {
+    country: {
         type: Sequelize.STRING, 
         allowNull: false
     },

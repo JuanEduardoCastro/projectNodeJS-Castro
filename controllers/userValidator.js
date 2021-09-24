@@ -14,7 +14,7 @@ const userValidator = (req, res, next) => {
             'string.max': 'La contraseña es muy largo...',
             'any.required': 'La contraseña es obligatoria'
         }),
-        name: joi.string().trim().min(2).max(255).required().messages({
+        firstName: joi.string().trim().min(2).max(255).required().messages({
             'string.min': 'El nombre debe contener mínimo 2 letras',
             'string.max': 'El nombre es muy largo...',
             'any.required': 'El nombre es obligatorio'

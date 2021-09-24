@@ -17,7 +17,7 @@ const Ingredient = db.define('Ingredient', {
         allowNull: false
     },
     unit: {
-        typ: Sequelize.INTEGER, 
+        type: Sequelize.INTEGER, 
         allowNull: false
     }
 })
