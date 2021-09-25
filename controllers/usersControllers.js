@@ -50,46 +50,6 @@ const usersControllers = {
                 })
             }
         }
-        // if (req.query.edit) {
-        //     newUser = await User.findOne({ _id: req.session._id })
-        //     newUser.name = name
-        //     newUser.lastName = lastName
-        //     newUser.photo = photo
-        //     newUser.job = job
-        //     newUser.country = country
-        // } else {
-        //     let hashPassword = bcrypt.hashSync(password)
-        //     newUser = new User({
-        //         eMail, password: hashPassword, name, lastName, photo, job, country
-        //     })
-        //     try {
-        //         let userCheck = await User.findOne({ eMail: eMail })
-        //         if (userCheck) {
-        //             throw new Error()
-        //         }
-        //     } catch (error) {
-        //         res.render('newUser', {
-        //             title: 'REGISTRO',
-        //             userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-        //             validationsError: {message: 'El correo electrónico ya está registrado.'},
-        //         })
-        //         return error
-        //     }
-        // }
-        // try {
-        //     await newUser.save()
-        //     if (req.query.edit) {
-        //         res.redirect('/usuario')
-        //     } else {
-        //         res.redirect('/ingreso')
-        //     }
-        // } catch (error) {
-        //     res.render('newUser', {
-        //         title: 'REGISTRO',
-        //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-        //         validationsError: {message: 'Hubo un problema con la base de datos. Intentetelo mas tarde.'},
-        //     })
-        // }
     },
 
     getUser: async (req, res) => {
@@ -148,42 +108,44 @@ const usersControllers = {
     },
 
     deleteUser: async (req, res) => {
-        // if (req.session.userLogIn) {
-        //     const {eMail, password} = req.body
-        //     if (eMail && password) {
-        //         try {
-        //             if (req.body.eMail && req.body.password) {
-        //                 let userConfirm = await User.findOne({ eMail })
-        //                 let hashPassword = bcrypt.compareSync(password, userConfirm.password)  
-        //                 if (hashPassword) {
-        //                     await User.findOneAndDelete({ _id: req.session._id, })
-        //                     req.session.destroy(() => {
-        //                         res.redirect('/')
-        //                         //mandar a deleteOk
-        //                     })
-        //                 } else {
-        //                     throw new Error()
-        //                 }
-        //             } else {
-        //                 throw new Error()
-        //             }
-        //         } catch (error) {
-        //             res.render('deleteConfirm', {
-        //                 title: 'ELIMINAR USUARIO',
-        //                 userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-        //                 errorMessage: 'Correo electrónico o conaseña invalida',
-        //             })
-        //         }
-        //     } else {
-        //         res.render('deleteConfirm', {
-        //             title: 'ELIMINAR USUARIO',
-        //             userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-        //             errorMessage: false           
-        //         })
-        //     }
-        // } else {
-        //     res.redirect('/')
-        // }
+        if (req.session.userLogIn) {
+            const {eMail, password} = req.body
+            if (eMail && password) {
+                console.log("entro delete con email password")
+                try {
+                    if (req.body.eMail && req.body.password) {
+                        let userConfirm = await User.findOne({ where: { eMail: eMail }, raw: true })
+                        let hashPassword = bcrypt.compareSync(password, userConfirm.password)  
+                        if (hashPassword) {
+                            await User.destroy({ where: { eMail: eMail }, raw: true })
+                            req.session.destroy(() => {
+                                res.redirect('/')
+                                //mandar a deleteOk
+                            })
+                        } else {
+                            throw new Error()
+                        }
+                    } else {
+                        throw new Error()
+                    }
+                } catch (error) {
+                    res.render('deleteConfirm', {
+                        title: 'ELIMINAR USUARIO',
+                        userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                        errorMessage: 'Correo electrónico o conaseña invalida',
+                    })
+                }
+            } else {
+                console.log("entro delete sin mail")
+                res.render('deleteConfirm', {
+                    title: 'ELIMINAR USUARIO',
+                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                    errorMessage: false           
+                })
+            }
+        } else {
+            res.redirect('/')
+        }
     },
 
     logIn: (req, res) => {

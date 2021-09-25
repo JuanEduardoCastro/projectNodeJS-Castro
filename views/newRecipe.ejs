@@ -28,22 +28,23 @@
                         <label for="rations" >Raciones:</label>
                         <input type="text" name="rations" id="rations" required/>
                     </div>
-                    <div class="newRecipeIngredients">
+                    <div class="newRecipeIngredients" id="ingredientsBox">
+                        <span id="ingredientsPlusButton">+</span>
+                        <label for="ingredients" >Ingredientes:</label>
                         <div class="ingredientsLine">
-                            <button>+</button>
-                            <label for="ingredients" >Ingrediente:</label>
-                            <input type="text" name="ingredients" id="ingredients" />
+                            <div>
+                                <input type="text" name="ingredients" id="ingredients" />
+                            </div>     
                         </div>
-                        <div class="ingredientsLine">
-                            <input type="text" name="ingredients" id="ingredients" />
-                        </div>
-
                     </div>
                     <div class="newRecipeSteps">
+                        <span id="stepsPlusButton">+</span>
+                        <label for="steps" >Procedimientos:</label>
                         <div class="stepsLine">
-                            <label for="steps" >Procedimiento:</label>
-                            <input type="text" name="steps" id="steps" />
-                        </div>                   
+                            <div>
+                                <input type="text" name="steps" id="steps" />
+                            </div>     
+                        </div>
                     </div>                  
                 </div>
                 <div class="newRecipeButton">

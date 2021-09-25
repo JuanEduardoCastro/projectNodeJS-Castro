@@ -597,15 +597,82 @@ footer div:nth-child(2) {
   font-weight: 600;
 }
 
-.newRecipeBox form .newRecipeForm div .newRecipeIngredients {
-  background-color: lightgray;
-  /* select {
-                        @extend %input-sketch;
-                    } */
+.newRecipeBox form .newRecipeForm .newRecipeIngredients {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
 }
 
-.newRecipeBox form .newRecipeForm div .newRecipeIngredients .ingredientsLine input {
-  width: 66%;
+.newRecipeBox form .newRecipeForm .newRecipeIngredients label {
+  padding-top: 0.6vh;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeIngredients span {
+  position: absolute;
+  top: 0;
+  left: 14vw;
+  border: none;
+  background-color: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeIngredients .ingredientsLine {
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeIngredients .ingredientsLine input {
+  width: 100%;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeSteps {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeSteps label {
+  padding-top: 0.6vh;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeSteps span {
+  position: absolute;
+  top: 0;
+  left: 14vw;
+  border: none;
+  background-color: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeSteps .stepsLine {
+  width: 60%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeSteps .stepsLine input {
+  width: 100%;
 }
 
 .newRecipeBox form .newRecipeButton {
