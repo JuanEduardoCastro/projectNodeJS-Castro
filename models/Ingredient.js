@@ -8,18 +8,18 @@ const Ingredient = db.define('Ingredient', {
         primaryKey: true, 
         allowNull: false
     },
-    ingrediente: {
+    // number: {
+    //     type: Sequelize.INTEGER, 
+    //     allowNull: false
+    // },
+    // unit: {
+    //     type: Sequelize.INTEGER, 
+    //     allowNull: false
+    // },
+    ingredient: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    number: {
-        type: Sequelize.INTEGER, 
-        allowNull: false
-    },
-    unit: {
-        type: Sequelize.INTEGER, 
-        allowNull: false
-    }
 })
 
 module.exports = Ingredient

@@ -653,7 +653,7 @@ footer div:nth-child(2) {
 .newRecipeBox form .newRecipeForm .newRecipeSteps span {
   position: absolute;
   top: 0;
-  left: 14vw;
+  left: 12vw;
   border: none;
   background-color: transparent;
   font-size: 28px;

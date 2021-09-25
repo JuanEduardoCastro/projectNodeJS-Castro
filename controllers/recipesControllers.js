@@ -1,4 +1,6 @@
-const Recipe = require('../models/Recipe')
+const Recipe = require('../models/Recipe');
+const Ingredient = require('../models/Ingredient');
+const Step = require('../models/Step');
 
 const recipesControllers = {
     home: (req, res) => {
@@ -9,45 +11,45 @@ const recipesControllers = {
     },
 
     getAllRecipes: async (req, res) => {
-        try {
-            let allRecipes = await Recipe.find()
-            res.render('recipes', {
-                title: 'RECETARIO',
-                recipesList: allRecipes,
-                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                errorMessage: null
-            })
-        } catch (error) {
-            res.render('recipes', {
-                title: 'RECETARIO',
-                recipesList: allRecipes,
-                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
+        // try {
+        //     let allRecipes = await Recipe.find()
+        //     res.render('recipes', {
+        //         title: 'RECETARIO',
+        //         recipesList: allRecipes,
+        //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+        //         errorMessage: null
+        //     })
+        // } catch (error) {
+        //     res.render('recipes', {
+        //         title: 'RECETARIO',
+        //         recipesList: allRecipes,
+        //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+        //         errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
                 
-            })
-        }
+        //     })
+        // }
     },
 
     getRecipesByUser: async (req, res) => {
         if (req.session.userLogIn) {
-            try {
-                let userRecipes = await Recipe.find({ userId: req.session._id })
-                res.render('userRecipes', {
-                    title: 'MIS RECETAS',
-                    recipesList: userRecipes,
-                    userName: req.session.name,
-                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                    errorMessage: null
-                })
-            } catch (error) {
-                res.render('userRecipes', {
-                    title: 'MIS RECETAS',
-                    recipesList: userRecipes,
-                    userName: req.session.name,
-                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                    errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
-                })
-            }
+            // try {
+            //     let userRecipes = await Recipe.find({ userId: req.session._id })
+            //     res.render('userRecipes', {
+            //         title: 'MIS RECETAS',
+            //         recipesList: userRecipes,
+            //         userName: req.session.name,
+            //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+            //         errorMessage: null
+            //     })
+            // } catch (error) {
+            //     res.render('userRecipes', {
+            //         title: 'MIS RECETAS',
+            //         recipesList: userRecipes,
+            //         userName: req.session.name,
+            //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+            //         errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
+            //     })
+            // }
         } else {
             res.redirect('/')
         }
@@ -68,30 +70,52 @@ const recipesControllers = {
 
     sendNewRecipe: async (req, res) => {
         const {recipePhoto, recipeTitle, description, duration, rations, ingredients, steps} = req.body
-        let newRecipe
-        if (req.query.edit === "true") {
-            newRecipe = await Recipe.findOne({ _id: req.query.id })
-            newRecipe.recipePhoto = recipePhoto
-            newRecipe.recipeTitle = recipeTitle
-            newRecipe.description = description
-            newRecipe.duration = duration
-            newRecipe.rations = rations
-            newRecipe.ingredients = ingredients
-            newRecipe.steps = steps
+        // let newRecipe
+        if (req.query.edit) {
+        //     newRecipe = await Recipe.findOne({ _id: req.query.id })
+        //     newRecipe.recipePhoto = recipePhoto
+        //     newRecipe.recipeTitle = recipeTitle
+        //     newRecipe.description = description
+        //     newRecipe.duration = duration
+        //     newRecipe.rations = rations
+        //     newRecipe.ingredients = ingredients
+        //     newRecipe.steps = steps
         } else {
-            newRecipe = new Recipe({ recipePhoto, recipeTitle, description, duration, rations, ingredients, steps, userId: req.session._id })
+            try {
+                let newRecipe = await Recipe.create({
+                    recipePhoto, recipeTitle, description, duration, rations, UserId: req.session._id
+                })
+                if (Array.isArray(ingredients)) {
+                    ingredients.forEach(async (ingredient) => {
+                        await Ingredient.create({ ingredient, RecipeId: newRecipe.dataValues.id })
+                    })
+                } else {
+                    await Ingredient.create({ ingredient: ingredients, RecipeId: newRecipe.dataValues.id })
+                }
+                if (Array.isArray(steps)) {
+                    steps.forEach(async (step) => {
+                        await Step.create({ step, RecipeId: newRecipe.dataValues.id })
+                    })
+                } else {
+                    await Step.create({ step: steps, RecipeId: newRecipe.dataValues.id })
+                }
+                
+            } catch (error) {
+                console.log(error)
+            }
+        //     newRecipe = new Recipe({ recipePhoto, recipeTitle, description, duration, rations, ingredients, steps, userId: req.session._id })
         }
-        try {
-            await newRecipe.save()
-            res.redirect(`/receta/${newRecipe._id}`)
-        } catch (error) {
-            res.render('newRecipe', {
-                title: 'NUEVA RECETA',
-                editRecipe: false,
-                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-                errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
-            })
-        }
+        // try {
+        //     await newRecipe.save()
+        //     res.redirect(`/receta/${newRecipe._id}`)
+        // } catch (error) {
+        //     res.render('newRecipe', {
+        //         title: 'NUEVA RECETA',
+        //         editRecipe: false,
+        //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+        //         errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
+        //     })
+        // }
     },
 
     getRecipe: async (req, res) => {
