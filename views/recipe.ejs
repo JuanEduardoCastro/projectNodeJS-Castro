@@ -2,107 +2,116 @@
 <%-  include('partials/header.ejs') %> 
 
     <% let queryEdit = editRecipe %>
-    <% let recipeId = editRecipe ? recipeProfile._id : null %>
-        <div class="newRecipeBox">
-            <div class="newRecipeTitle">
-                <h2>Agrega tu receta y compártela en  <span>COMUNIDAD COCINERA</span></h2>
-            </div>
-            <div class="newRecipeTitleButton">
-                <a href="/editar-receta/<%= recipeProfile._id %>"><p>Editar receta</p></a>
-            </div>
-            <form action="/nueva-receta?edit=<%= queryEdit %>&id=<%= recipeId %>" method="POST">
-                <div class="newRecipeLeftSide">
-                    <div>
-                        <label for="recipePhoto" >URL de la foto:</label>
-                        <% if (editRecipe === false) { %> 
-                            <p><%= recipeProfile.recipePhoto.slice(0, 25) %>...</p>
-                        <% } else { %>
-                            <input type="text" name="recipePhoto" id="recipePhoto" required value="<%= recipeProfile.recipePhoto %>"/>
-                        <% } %>    
-                    </div>
-                    <div>
-                        <label for="recipeTitle" >Titulo receta:</label>
-                        <% if (editRecipe === false) { %> 
-                            <p><%= recipeProfile.recipeTitle %></p>
-                        <% } else { %>
-                            <input type="text" name="recipeTitle" id="recipeTitle" required value="<%= recipeProfile.recipeTitle %>"/>
-                        <% } %>    
-                    </div>
-                    <div>
-                        <label for="description" >Descripción:</label>
-                        <% if (editRecipe === false) { %> 
-                            <p><%= recipeProfile.description %></p>
-                        <% } else { %>
-                            <input type="text" name="description" id="description" required value="<%= recipeProfile.description %>"/>
-                        <% } %>    
-                    </div>
-                    <div>
-                        <label for="duration" >Duración:</label>
-                        <% if (editRecipe === false) { %> 
-                            <p><%= recipeProfile.duration %></p>
-                        <% } else { %>
-                            <input type="text" name="duration" id="duration" required value="<%= recipeProfile.duration %>"/>
-                        <% } %>    
-                    </div>
-                    <div>
-                        <label for="rations" >Raciones:</label>
-                        <% if (editRecipe === false) { %> 
-                            <p><%= recipeProfile.rations %></p>
-                        <% } else { %>
-                            <input type="text" name="rations" id="rations" required value="<%= recipeProfile.rations %>"/>
-                        <% } %>    
-                    </div>
-                    <div class="newRecipeIngredients">
-                        <label for="ingredients" >Ingredientes:</label>
-                        <% if (editRecipe === false) { %> 
-                            <% let recipeProfileIngredientFiltered = recipeProfile.ingredients.filter(ingredient => ingredient.length > 0) %>
-                            <% recipeProfileIngredientFiltered.map((ingredient) => { %>
-                                <div class="ingredientsLine">
-                                    <label for="ingredients" >Ingrediente:</label>
-                                    <p><%= ingredient %></p>
-                                </div>
-                            <% }) %>
-                        <% } else { %>
-                            <!-- <% let recipeProfileFiltered = recipeProfile.ingredients.filter(ingredient => ingredient.length > 0) %> -->
-                            <% recipeProfile.ingredients.map((ingredient) => { %>
-                                <div class="ingredientsLine">
-                                    <label for="ingredients" >Ingrediente:</label>
-                                    <input type="text" name="ingredients" id="ingredients" value="<%= ingredient %>"/>
-                                </div>
-                            <% }) %>
-                        <% } %>    
-                    </div>
-                    <div class="newRecipeSteps">
-                        <label for="steps" >Procedimiento:</label>
-                        <% if (editRecipe === false) { %> 
-                            <% let recipeProfileStepFiltered = recipeProfile.steps.filter(step => step.length > 0) %>
-                            <% recipeProfileStepFiltered.map((step) => { %>
-                                <div class="stepsLine">
-                                    <label for="steps" >Paso:</label>
-                                    <p><%= step %></p>
-                                </div>
-                            <% }) %>
-                        <% } else { %>
-                            <% recipeProfile.steps.map((step) => { %>
-                                <div class="stepsLine">
-                                    <label for="steps" >Paso:</label>
-                                    <input type="text" name="steps" id="steps" value="<%= step %>"/>
-                                </div>
-                            <% }) %>
-                        <% } %>
+    <% let recipeId = editRecipe ? recipeProfile.id : null %>
+    <div class="newRecipeBox">
+        <div class="newRecipeTitle">
+            <h2>Agrega tu receta y compártela en  <span>COMUNIDAD COCINERA</span></h2>
+        </div>
+        <div class="newRecipeTitleButton">
+            <% if (editRecipe === false) { %>
+                <a href="/editar-receta/<%= recipeProfile.id %>"><p>Editar receta</p></a>
+            <% } else { %>
+                <a href="/confirmacion-eliminar-receta/<%= recipeProfile.id %>"><p>Eliminar</p></a>
+                <a href="/receta/<%= recipeProfile.id %>"><p>Cancelar</p></a>
+                <!-- <a href="/editar-receta/<%= recipeProfile.id %>"><p>Editar receta</p></a> -->
+            <% } %>
+        </div>
+        <form action="/nueva-receta?edit=<%= queryEdit %>&id=<%= recipeId %>" method="POST">
+            <div class="newRecipeForm">
+                <div>
+                    <label for="recipePhoto" >URL de la foto:</label>
+                    <% if (editRecipe === false) { %> 
+                        <h3><%= recipeProfile.recipePhoto.slice(0, 25) %>...</h3>
+                    <% } else { %>
+                        <input type="text" name="recipePhoto" id="recipePhoto" required value="<%= recipeProfile.recipePhoto %>"/>
+                    <% } %>    
+                </div>
+                <div>
+                    <label for="recipeTitle" >Titulo receta:</label>
+                    <% if (editRecipe === false) { %> 
+                        <h3><%= recipeProfile.recipeTitle %></h3>
+                    <% } else { %>
+                        <input type="text" name="recipeTitle" id="recipeTitle" required value="<%= recipeProfile.recipeTitle %>"/>
+                    <% } %>    
+                </div>
+                <div>
+                    <label for="description" >Descripción:</label>
+                    <% if (editRecipe === false) { %> 
+                        <h3><%= recipeProfile.description %></h3>
+                    <% } else { %>
+                        <input type="text" name="description" id="description" required value="<%= recipeProfile.description %>"/>
+                    <% } %>    
+                </div>
+                <div>
+                    <label for="duration" >Duración:</label>
+                    <% if (editRecipe === false) { %> 
+                        <h3><%= recipeProfile.duration %></h3>
+                    <% } else { %>
+                        <input type="text" name="duration" id="duration" required value="<%= recipeProfile.duration %>"/>
+                    <% } %>    
+                </div>
+                <div>
+                    <label for="rations" >Raciones:</label>
+                    <% if (editRecipe === false) { %> 
+                        <h3><%= recipeProfile.rations %></h3>
+                    <% } else { %>
+                        <input type="text" name="rations" id="rations" required value="<%= recipeProfile.rations %>"/>
+                    <% } %>    
+                </div>
+                <div class="newRecipeIngredients" id="ingredientsBox">
+                    <% if (!editRecipe === false) { %>
+                        <span id="ingredientsLessButton">-</span>
+                        <span id="ingredientsPlusButton">+</span>
+                    <% } %>
+                    <label for="ingredients" >Ingredientes:</label>
+                    <div class="ingredientsLine">
+                    <% if (editRecipe === false) { %> 
+                        <% ingredients.map((ingredient) => { %>
+                            <div>
+                                <h3>- <%= ingredient.ingredient %></h3>
+                            </div>        
+                        <% }) %>
+                    <% } else { %>
+                        <% ingredients.map((ingredient) => { %>
+                            <div>
+                                <input type="text" name="ingredients" id="ingredients" value="<%= ingredient.ingredient %>"/>
+                            </div>
+                        <% }) %>
+                    <% } %> 
+                    </div>   
+                </div>
+                <div class="newRecipeSteps">
+                    <% if (!editRecipe === false) { %>
+                        <span id="stepsLessButton">-</span>
+                        <span id="stepsPlusButton">+</span>
+                    <% } %>
+                    <label for="steps" >Procedimiento:</label>
+                    <div class="stepsLine">
+                    <% if (editRecipe === false) { %> 
+                        <% steps.map((step) => { %>
+                            <div>
+                                <h3>- <%= step.step %></h3>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <% steps.map((step) => { %>
+                            <div class="stepsLine">
+                                <input type="text" name="steps" id="steps" value="<%= step.step %>"/>
+                            </div>
+                        <% }) %>
+                    <% } %>
                     </div>
                 </div>
-                <% if (editRecipe === false) { %>
-                    <div></div>
-                <% } else { %>
-                    <div class="newRecipeButton">
-                        <a href="/receta/<%= recipeProfile._id %>"><input type="button" value="Cancelar" /></a>
-                        <input type="submit" value="Enviar" />
-                        <a href="/confirmacion-eliminar-receta/<%= recipeProfile._id %>"><input type="button" value="Eliminar" /></a>
-                    </div>
-                <% } %>
-                
-            </form>
-        </div>
+            </div>
+            <% if (editRecipe === false) { %>
+                <div></div>
+            <% } else { %>
+                <div class="newRecipeButton">
+                    <input type="submit" value="Enviar" />
+                </div>
+            <% } %>
+            
+        </form>
+    </div>
 
 <%-  include('partials/footer.ejs') %> 

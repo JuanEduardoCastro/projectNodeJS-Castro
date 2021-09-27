@@ -1,4 +1,3 @@
-@charset "UTF-8";
 html * {
   padding: 0;
   margin: 0;
@@ -8,14 +7,14 @@ html * {
 
 /* variables */
 /* extend */
-.HOME, .REGISTRO, .PERFIL, .INGRESO, .RECETARIO, .RECETAS, .NUEVA {
+.HOME, .REGISTRO, .PERFIL, .ELIMINAR, .ELIMINADO, .INGRESO, .RECETARIO, .RECETAS, .NUEVA, .RECETA {
   position: relative;
   width: 100%;
   min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.75);
 }
 
-.HOME::after, .REGISTRO::after, .PERFIL::after, .INGRESO::after, .RECETARIO::after, .RECETAS::after, .NUEVA::after {
+.HOME::after, .REGISTRO::after, .PERFIL::after, .ELIMINAR::after, .ELIMINADO::after, .INGRESO::after, .RECETARIO::after, .RECETAS::after, .NUEVA::after, .RECETA::after {
   content: "";
   position: absolute;
   background-size: cover;
@@ -37,7 +36,7 @@ html * {
           box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
 }
 
-.newUserBox form div input, .newUserBox form div select, .newRecipeBox form .newRecipeForm div input, .newRecipeBox form .newRecipeButton input {
+.newUserBox form div input, .newUserBox form div select, .newUserBox form .newUserButton input, .newRecipeBox form .newRecipeForm div input, .newRecipeBox form .newRecipeButton input {
   width: 60%;
   height: 5vh;
   font-size: 18px;
@@ -57,7 +56,7 @@ html * {
   cursor: pointer;
 }
 
-.newUserBox .newUserTitleButton, .recipesBox .recipeCard .recipeCardEditButton {
+.newUserBox .newUserTitleButton, .recipesBox .recipeCard .recipeCardEditButton, .newRecipeBox .newRecipeTitleButton {
   width: 70%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -68,7 +67,7 @@ html * {
   gap: 2rem;
 }
 
-.newUserBox .newUserTitleButton a, .recipesBox .recipeCard .recipeCardEditButton a {
+.newUserBox .newUserTitleButton a, .recipesBox .recipeCard .recipeCardEditButton a, .newRecipeBox .newRecipeTitleButton a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -79,7 +78,7 @@ html * {
   text-decoration: none;
 }
 
-.newUserBox .newUserTitleButton a p, .recipesBox .recipeCard .recipeCardEditButton a p {
+.newUserBox .newUserTitleButton a p, .recipesBox .recipeCard .recipeCardEditButton a p, .newRecipeBox .newRecipeTitleButton a p {
   width: 100%;
   height: 100%;
   border-radius: 5px;
@@ -87,7 +86,7 @@ html * {
   font-weight: 600;
 }
 
-.newUserBox form div input:focus, .newUserBox form div select:focus, .newRecipeBox form .newRecipeForm div input:focus {
+.newUserBox form div input:focus, .newUserBox form div select:focus, .newUserBox form .newUserButton input:focus, .newRecipeBox form .newRecipeForm div input:focus, .newRecipeBox form .newRecipeButton input:focus {
   outline: 1px solid transparent;
   -webkit-box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
           box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.25);
@@ -199,7 +198,6 @@ footer div:nth-child(1) nav a {
 }
 
 footer div:nth-child(2) {
-  background-color: lightblue;
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -321,12 +319,8 @@ footer div:nth-child(2) {
   transition: transform 0.2s ease-in, -webkit-transform 0.2s ease-in;
 }
 
-/* NEW USER, USER, EDIT USER, LOGIN */
-.REGISTRO::after {
-  background-image: url("../assets/mesa-comida3.jpg");
-}
-
-.PERFIL::after {
+/* NEW USER, USER, EDIT USER, LOGIN, DELETE */
+.REGISTRO::after, .PERFIL::after, .ELIMINAR::after, .ELIMINADO::after {
   background-image: url("../assets/Utencilios-cocina2.jpg");
 }
 
@@ -336,7 +330,7 @@ footer div:nth-child(2) {
 
 .newUserBox {
   width: 60%;
-  min-height: 45vh;
+  min-height: 55vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -352,7 +346,6 @@ footer div:nth-child(2) {
           align-items: center;
   padding: 3rem 0;
   gap: 2rem;
-  /* revisar para que quede el espacio */
 }
 
 .newUserBox .newUserTitle {
@@ -361,12 +354,14 @@ footer div:nth-child(2) {
 }
 
 .newUserBox .errorMessage {
+  height: 5vh;
   color: red;
   font-size: 20px;
   font-weight: 600;
 }
 
 .newUserBox .errorMessageHidden {
+  height: 5vh;
   visibility: hidden;
 }
 
@@ -417,9 +412,16 @@ footer div:nth-child(2) {
   height: 5vh;
 }
 
-.newUserBox form div h3 {
+.newUserBox form div h3, .newUserBox form div p {
+  width: 60%;
   height: 5vh;
   font-size: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .newUserBox form .newUserButton {
@@ -433,13 +435,14 @@ footer div:nth-child(2) {
   margin-top: 2rem;
 }
 
-/* RECIPES */
-.RECETARIO::after {
-  background-image: url("../assets/cocina.jpg");
+.newUserBox form .newUserButton input {
+  width: 100%;
+  cursor: pointer;
 }
 
-.RECETAS::after {
-  background-image: url("../assets/cocina.jpg");
+/* RECIPES */
+.RECETARIO::after, .RECETAS::after {
+  background-image: url("../assets/cocina04.jpg");
 }
 
 .recipesBox {
@@ -519,7 +522,7 @@ footer div:nth-child(2) {
 }
 
 /* NEW RECIPE */
-.NUEVA::after {
+.NUEVA::after, .RECETA::after {
   background-image: url("../assets/Utencilios-cocina.jpg");
 }
 
@@ -541,9 +544,6 @@ footer div:nth-child(2) {
           align-items: center;
   padding: 3rem 0;
   gap: 2rem;
-  /*     .newRecieTitleButton {
-
-    } */
 }
 
 .newRecipeBox .mewRecipeTitle {
@@ -561,7 +561,6 @@ footer div:nth-child(2) {
       -ms-flex-direction: column;
           flex-direction: column;
   gap: 1.3rem;
-  /* revisar tamaño boton */
 }
 
 .newRecipeBox form .newRecipeForm {
@@ -597,6 +596,17 @@ footer div:nth-child(2) {
   font-weight: 600;
 }
 
+.newRecipeBox form .newRecipeForm div h3, .newRecipeBox form .newRecipeForm div p {
+  width: 60%;
+  height: 5vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .newRecipeBox form .newRecipeForm .newRecipeIngredients {
   position: relative;
   display: -webkit-box;
@@ -611,7 +621,17 @@ footer div:nth-child(2) {
   padding-top: 0.6vh;
 }
 
-.newRecipeBox form .newRecipeForm .newRecipeIngredients span {
+.newRecipeBox form .newRecipeForm .newRecipeIngredients #ingredientsLessButton {
+  position: absolute;
+  top: 0;
+  left: 12vw;
+  border: none;
+  background-color: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeIngredients #ingredientsPlusButton {
   position: absolute;
   top: 0;
   left: 14vw;
@@ -630,10 +650,27 @@ footer div:nth-child(2) {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .newRecipeBox form .newRecipeForm .newRecipeIngredients .ingredientsLine input {
   width: 100%;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeIngredients .ingredientsLine div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeIngredients .ingredientsLine div p {
+  height: 5vh;
 }
 
 .newRecipeBox form .newRecipeForm .newRecipeSteps {
@@ -650,7 +687,17 @@ footer div:nth-child(2) {
   padding-top: 0.6vh;
 }
 
-.newRecipeBox form .newRecipeForm .newRecipeSteps span {
+.newRecipeBox form .newRecipeForm .newRecipeSteps #stepsLessButton {
+  position: absolute;
+  top: 0;
+  left: 10vw;
+  border: none;
+  background-color: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.newRecipeBox form .newRecipeForm .newRecipeSteps #stepsPlusButton {
   position: absolute;
   top: 0;
   left: 12vw;
@@ -675,6 +722,16 @@ footer div:nth-child(2) {
   width: 100%;
 }
 
+.newRecipeBox form .newRecipeForm .newRecipeSteps .stepsLine div {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
 .newRecipeBox form .newRecipeButton {
   width: 50%;
   display: -webkit-box;
@@ -687,5 +744,9 @@ footer div:nth-child(2) {
       -ms-flex-align: center;
           align-items: center;
   margin: 2rem auto;
+}
+
+.newRecipeBox form .newRecipeButton input {
+  cursor: pointer;
 }
 /*# sourceMappingURL=style.css.map */

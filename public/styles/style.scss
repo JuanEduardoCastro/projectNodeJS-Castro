@@ -171,7 +171,6 @@ footer {
     }
 
     div:nth-child(2) {
-        background-color: lightblue;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -181,6 +180,7 @@ footer {
 .active {
     text-decoration: underline !important;
 }
+
 
 /* HOME */
 
@@ -270,28 +270,15 @@ footer {
 }
 
 
-/* NEW USER, USER, EDIT USER, LOGIN */
+/* NEW USER, USER, EDIT USER, LOGIN, DELETE */
 
-.REGISTRO {
+.REGISTRO, .PERFIL, .ELIMINAR, .ELIMINADO, .INGRESO {
     @extend %bg-relative;
 }
 
-.REGISTRO::after {
-    @extend %bg-absolute;
-    background-image: url('../assets/mesa-comida3.jpg');
-}
-
-.PERFIL {
-    @extend %bg-relative;
-}
-
-.PERFIL::after {
+.REGISTRO::after, .PERFIL::after, .ELIMINAR::after, .ELIMINADO::after {
     @extend %bg-absolute;
     background-image: url('../assets/Utencilios-cocina2.jpg');
-}
-
-.INGRESO {
-    @extend %bg-relative;
 }
 
 .INGRESO::after {
@@ -302,7 +289,7 @@ footer {
 .newUserBox {
     @extend %box-sketch;
     width: 60%;
-    min-height: 45vh;
+    min-height: 55vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -315,14 +302,15 @@ footer {
         text-align: center;
     }
 
-    /* revisar para que quede el espacio */
     .errorMessage {
+        height: 5vh;
         color: red;
         font-size: 20px;
         font-weight: 600;
     }
 
     .errorMessageHidden {
+        height: 5vh;
         visibility: hidden;
     }
 
@@ -373,9 +361,12 @@ footer {
                 height: 5vh;
             }
 
-            h3 {
+            h3, p {
+                width: 60%;
                 height: 5vh;
                 font-size: 18px;
+                display: flex;
+                align-items: center;
             }
         }
 
@@ -384,29 +375,31 @@ footer {
             display: flex;
             justify-content: center;
             margin-top: 2rem;
-        }
+
+            input {
+                @extend %input-sketch;
+                width: 100%;
+                cursor: pointer;
+            }
+
+            input:focus {
+                @extend %focus-sketch;
+            }
+        }   
     }
 
 }
 
+
 /* RECIPES */
 
-.RECETARIO {
+.RECETARIO, .RECETAS {
     @extend %bg-relative;
 }
 
-.RECETARIO::after {
+.RECETARIO::after, .RECETAS::after {
     @extend %bg-absolute;
-    background-image: url('../assets/cocina.jpg');
-}
-
-.RECETAS {
-    @extend %bg-relative;
-}
-
-.RECETAS::after {
-    @extend %bg-absolute;
-    background-image: url('../assets/cocina.jpg');
+    background-image: url('../assets/cocina04.jpg');
 }
 
 .recipesBox {
@@ -489,11 +482,11 @@ footer {
 
 /* NEW RECIPE */
 
-.NUEVA {
+.NUEVA, .RECETA {
     @extend %bg-relative;
 }
 
-.NUEVA::after {
+.NUEVA::after, .RECETA::after {
     @extend %bg-absolute;
     background-image: url('../assets/Utencilios-cocina.jpg');
 }
@@ -514,9 +507,9 @@ footer {
         text-align: center;
     }
 
-/*     .newRecieTitleButton {
-
-    } */
+    .newRecipeTitleButton {
+        @extend %a-button-sketch;
+    }
 
     form {
         width: 95%;
@@ -551,7 +544,13 @@ footer {
                 input:focus {
                     @extend %focus-sketch;
                 }
-
+                
+                h3, p {
+                    width: 60%;
+                    height: 5vh;
+                    display: flex;
+                    align-items: center;
+                }
             }   
             
             .newRecipeIngredients {
@@ -563,7 +562,17 @@ footer {
                     padding-top: 0.6vh;
                 }
 
-                span {
+                #ingredientsLessButton {
+                    position: absolute;
+                    top: 0;
+                    left: 12vw;
+                    border: none;
+                    background-color: transparent;
+                    font-size: 28px;
+                    cursor: pointer;
+                }
+
+                #ingredientsPlusButton {
                     position: absolute;
                     top: 0;
                     left: 14vw;
@@ -577,9 +586,20 @@ footer {
                     width: 60%;
                     display: flex;
                     flex-direction: column;
+                    align-items: flex-end;
                     
                     input {
                         width: 100%;
+                    }
+
+                    div {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-start;
+
+                        p {
+                            height: 5vh;
+                        }
                     }
                 }
             }
@@ -593,7 +613,17 @@ footer {
                     padding-top: 0.6vh;
                 }
 
-                span {
+                #stepsLessButton {
+                    position: absolute;
+                    top: 0;
+                    left: 10vw;
+                    border: none;
+                    background-color: transparent;
+                    font-size: 28px;
+                    cursor: pointer;
+                }
+                
+                #stepsPlusButton {
                     position: absolute;
                     top: 0;
                     left: 12vw;
@@ -611,20 +641,30 @@ footer {
                     input {
                         width: 100%;
                     }
+
+                    div {
+                        width: 100%;
+                        display: flex;
+                        justify-content: flex-start;
+                    }
                 }
             }
         }
 
-        /* revisar tamaño boton */
         .newRecipeButton {
             width: 50%;             
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 2rem auto;
-
+            
             input {
                 @extend %input-sketch;
+                cursor: pointer;
+            }
+
+            input:focus {
+                @extend %focus-sketch;
             }
         }
     }

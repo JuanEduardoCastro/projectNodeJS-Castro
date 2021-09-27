@@ -24,21 +24,21 @@
                 </div>
                 <div class="recipeCardIngredients">
                     <h4>Ingredientes:</h4>
-                    <% let recripeIngredientsFiltered = recipe.ingredients.filter(ingredient => ingredient.length > 0) %>
+                    <% let recripeIngredientsFiltered = ingredientsList.filter(ingredient => ingredient.RecipeId === recipe.id) %>
                     <% recripeIngredientsFiltered.map((ingredient) => { %>
-                        <p>- <%= ingredient %></p>
+                        <p>- <%= ingredient.ingredient %></p>
                     <% }) %>
                 </div>
                 <div class="recipeCardSteps">
                     <h4>Procedimiento:</h4>
-                    <% let recripeStepsFiltered = recipe.steps.filter(step => step.length > 0) %>
+                    <% let recripeStepsFiltered = stepsList.filter(step => step.RecipeId === recipe.id) %>
                     <% recripeStepsFiltered.map((step, index) => { %>
-                        <p><%= index + 1 %>. <%= step %></p>
+                        <p><%= index + 1 %>. <%= step.step %></p>
                     <% }) %>
                 </div>
             </di>
             <div class="recipeCardEditButton">
-                <a href="/receta/<%= recipe._id %>" ><p>Editar receta</p></a>
+                <a href="/receta/<%= recipe.id %>" ><p>Editar receta</p></a>
             </div>
         </div>
     </div>

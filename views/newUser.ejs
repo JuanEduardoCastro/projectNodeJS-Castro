@@ -2,59 +2,60 @@
 <%-  include('partials/header.ejs') %> 
 
     <% let className = validationsError ? 'errorMessage' : 'errorMessageHidden' %>
-        <div class="newUserBox">
-            <div class="newUserTitle">
-                <h2>Regístrate como nuevo usuario de la <span>COMUNIDAD COCINERA</span></h2>
-            </div>
-            <div class= <%= className %> >
-                <p><%= validationsError.message %></p>
-            </div>
-            <form action="/nuevo-usuario" method="POST">
-                <div>
-                    <label for="eMail" >Correo electrónico:</label>
-                    <input type="text" name="eMail" id="eMail" required/>
-                </div>
-                <div>
-                    <label for="password" >Password:</label>
-                    <input type="password" name="password" id="password" required/>
-                </div>
-                <div>
-                    <label for="firstName" >Nombre:</label>
-                    <input type="text" name="firstName" id="firstName" required/>
-                </div>  
-                <div>
-                    <label for="lastName" >Apellido:</label>
-                    <input type="text" name="lastName" id="lastName" required/>
-                </div>
-                <div>
-                    <label for="photo" >Avatar URL:</label>
-                    <input type="text" name="photo" id="photo" required/>
-                </div>
-                <div class="newUserSelect"> 
-                    <label for="job" >A que te dedicas:</label>
-                    <select name="job" >
-                        <option value="">Elíge una profesión</option>
-                        <option value="Cocinero profesional">Cocinero profesional</option>
-                        <option value="Cocinero eventual">Cocinero eventual</option>
-                        <option value="Cocinero en casa">Cocinero en casa</option>
-                        <option value="Aficionado a la cocina">Aficionado a la cocina</option>
-                        <option value="Cocino para alimentarme">Cocino para alimentarme</option>
-                        <option value="Nunca cociné">Nunca cociné</option>
-                    </select>
-                </div>
-                <div class="newUserSelect">
-                    <label for="country" >¿De donde eres?:</label>
-                    <select name="country">
-                        <option value="">Elíge un país</option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="Venezuela">Venezuea</option>
-                    </select>
-                </div>
-                <div class="newUserButton">
-                    <input type="submit" value="Enviar" />
-                </div>
-    
-            </form>
+    <% let inputLoad = inputReload ? input : '' %>
+    <div class="newUserBox">
+        <div class="newUserTitle">
+            <h2>Regístrate como nuevo usuario de la <span>COMUNIDAD COCINERA</span></h2>
         </div>
+        <div class= <%= className %> >
+            <p><%= validationsError.message %></p>
+        </div>
+        <form action="/nuevo-usuario" method="POST">
+            <div>
+                <label for="eMail" >Correo electrónico:</label>
+                <input type="text" name="eMail" id="eMail" required value="<%= inputReload ? input.eMail : '' %>"/>
+            </div>
+            <div>
+                <label for="password" >Password:</label>
+                <input type="password" name="password" id="password" required />
+            </div>
+            <div>
+                <label for="firstName" >Nombre:</label>
+                <input type="text" name="firstName" id="firstName" required value="<%= inputReload ? input.firstName : '' %>"/>
+            </div>  
+            <div>
+                <label for="lastName" >Apellido:</label>
+                <input type="text" name="lastName" id="lastName" required value="<%= inputReload ? input.lastName : '' %>"/>
+            </div>
+            <div>
+                <label for="photo" >Avatar URL:</label>
+                <input type="text" name="photo" id="photo" required value="<%= inputReload ? input.photo : '' %>"/>
+            </div>
+            <div class="newUserSelect"> 
+                <label for="job" >A que te dedicas:</label>
+                <select name="job" >
+                    <option value="<%= inputReload ? input.job : '' %>"><%= inputReload ? input.job : 'Elige una profesión' %></option>
+                    <option value="Cocinero profesional">Cocinero profesional</option>
+                    <option value="Cocinero eventual">Cocinero eventual</option>
+                    <option value="Cocinero en casa">Cocinero en casa</option>
+                    <option value="Aficionado a la cocina">Aficionado a la cocina</option>
+                    <option value="Cocino para alimentarme">Cocino para alimentarme</option>
+                    <option value="Nunca cociné">Nunca cociné</option>
+                </select>
+            </div>
+            <div class="newUserSelect">
+                <label for="country" >¿De donde eres?:</label>
+                <select name="country">
+                    <option value="<%= inputReload ? input.country : '' %>"><%= inputReload ? input.country : 'Elige un país' %></option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Venezuela">Venezuela</option>
+                </select>
+            </div>
+            <div class="newUserButton">
+                <input type="submit" value="Enviar" />
+            </div>
+
+        </form>
+    </div>
    
 <%-  include('partials/footer.ejs') %> 

@@ -2,55 +2,57 @@
 <%-  include('partials/header.ejs') %> 
 
     <% let titleOrError = errorMessage ? errorMessage : 'Agrega tu receta y compártela en' %>
-        <div class="newRecipeBox">
-            <div class="newRecipeTitle">
-                <h2><%= titleOrError %>  <span><%= !errorMessage ? 'COMUNIDAD COCINERA' : null %></span></h2>
-            </div>
-            <form action="/nueva-receta" method="POST">
-                <div class="newRecipeForm">
-                    <div>
-                        <label for="recipePhoto" >Sube un URL de la foto:</label>
-                        <input type="text" name="recipePhoto" id="recipePhoto" required/>
-                    </div>
-                    <div>
-                        <label for="recipeTitle" >Titulo receta:</label>
-                        <input type="text" name="recipeTitle" id="recipeTitle" required/>
-                    </div>
-                    <div>
-                        <label for="description" >Descripción:</label>
-                        <input type="text" name="description" id="description" required/>
-                    </div>
-                    <div>
-                        <label for="duration" >Duración:</label>
-                        <input type="text" name="duration" id="duration" required/>
-                    </div>
-                    <div>
-                        <label for="rations" >Raciones:</label>
-                        <input type="text" name="rations" id="rations" required/>
-                    </div>
-                    <div class="newRecipeIngredients" id="ingredientsBox">
-                        <span id="ingredientsPlusButton">+</span>
-                        <label for="ingredients" >Ingredientes:</label>
-                        <div class="ingredientsLine">
-                            <div>
-                                <input type="text" name="ingredients" id="ingredients" />
-                            </div>     
-                        </div>
-                    </div>
-                    <div class="newRecipeSteps">
-                        <span id="stepsPlusButton">+</span>
-                        <label for="steps" >Procedimientos:</label>
-                        <div class="stepsLine">
-                            <div>
-                                <input type="text" name="steps" id="steps" />
-                            </div>     
-                        </div>
-                    </div>                  
-                </div>
-                <div class="newRecipeButton">
-                    <input type="submit" value="Enviar" />
-                </div>
-            </form>
+    <div class="newRecipeBox">
+        <div class="newRecipeTitle">
+            <h2><%= titleOrError %>  <span><%= !errorMessage ? 'COMUNIDAD COCINERA' : null %></span></h2>
         </div>
+        <form action="/nueva-receta" method="POST">
+            <div class="newRecipeForm">
+                <div>
+                    <label for="recipePhoto" >Sube un URL de la foto:</label>
+                    <input type="text" name="recipePhoto" id="recipePhoto" required/>
+                </div>
+                <div>
+                    <label for="recipeTitle" >Titulo receta:</label>
+                    <input type="text" name="recipeTitle" id="recipeTitle" required/>
+                </div>
+                <div>
+                    <label for="description" >Descripción:</label>
+                    <input type="text" name="description" id="description" required/>
+                </div>
+                <div>
+                    <label for="duration" >Duración:</label>
+                    <input type="text" name="duration" id="duration" required/>
+                </div>
+                <div>
+                    <label for="rations" >Raciones:</label>
+                    <input type="text" name="rations" id="rations" required/>
+                </div>
+                <div class="newRecipeIngredients" id="ingredientsBox">
+                    <span id="ingredientsLessButton">-</span>
+                    <span id="ingredientsPlusButton">+</span>
+                    <label for="ingredients" >Ingredientes:</label>
+                    <div class="ingredientsLine">
+                        <div>
+                            <input type="text" name="ingredients" id="ingredients" />
+                        </div>     
+                    </div>
+                </div>
+                <div class="newRecipeSteps">
+                    <span id="stepsLessButton">-</span>
+                    <span id="stepsPlusButton">+</span>
+                    <label for="steps" >Procedimientos:</label>
+                    <div class="stepsLine">
+                        <div>
+                            <input type="text" name="steps" id="steps" />
+                        </div>     
+                    </div>
+                </div>                  
+            </div>
+            <div class="newRecipeButton">
+                <input type="submit" value="Enviar" />
+            </div>
+        </form>
+    </div>
 
 <%-  include('partials/footer.ejs') %> 

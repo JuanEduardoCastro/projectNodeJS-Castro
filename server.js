@@ -5,7 +5,6 @@ require('dotenv').config();
 const Sequelize = require('sequelize');
 const db = require('./config/db');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-
 const dbStore = new SequelizeStore({
     db: db,
 })
@@ -26,26 +25,23 @@ app.use(session({
     store: dbStore,
 }));
 
-//usuario tiene muchas recetas
+//recipe-user
 Recipe.belongsTo(User)
 User.hasMany(Recipe)
 
-//receta tiene muchos ingredientes
+//ingredient-recipe, ingredient-user
 Ingredient.belongsTo(Recipe)
 Recipe.hasMany(Ingredient)
 
-//receta tiene muchos pasos
+Ingredient.belongsTo(User)
+User.hasMany(Ingredient)
+
+//step-recipe, step-user
 Step.belongsTo(Recipe)
 Recipe.hasMany(Step)
 
-// //receta tiene muchsos likes de muchos usuarios
-// //usuario tiene muchos likes a muchas recetas
-// User.belongsToMany(Recipe, { through: 'likes' })
-// Recipe.hasMany(Recipe, { through: 'likes' })
-
-// //revisar ? ? 
-// User.belongsToMany(Recipe, { through: 'comments' })
-// Recipe.hasMany(Recipe, { through: 'comments' })
+Step.belongsTo(User)
+User.hasMany(Step)
 
 db.sync()
 .then(() => {

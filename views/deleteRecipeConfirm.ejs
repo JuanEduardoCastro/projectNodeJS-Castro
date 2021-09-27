@@ -2,34 +2,26 @@
 <%-  include('partials/header.ejs') %> 
 
     <% let className = errorMessage ? 'errorMessage' : 'errorMessageHidden' %>
-        <div class="newUserBox">
-            <div class="newUserTitle">
-                <h2>Confirma que quieres eliminar esta receta ingresando el titulo</h2> 
-            </div>
-            <div class=<%= className %>>
-                <p><%= errorMessage %></p>
-            </div>
-            <form action="/eliminar-receta/<%= recipeProfile._id %>" method="POST">
-                <div>
-                    <label for="recipeTitle" >Titulo de la receta:</label>
-                    <input type="text" name="recipeTitle" id="recipeTitle" required/>
-                </div>
-                <div>
-                </div>
-                <div>
-                </div>  
-                <div>
-                </div>
-                <div>
-                </div>
-                <div class="newUserSelect"> 
-                </div>
-                <div class="newUserSelect">
-                </div>
-                <div class="newUserButton">
-                    <input type="submit" value="Eliminar" />
-                </div>    
-            </form>
+    <div class="newUserBox">
+        <div class="newUserTitle">
+            <h2>Confirma que quieres eliminar esta receta ingresando el título</h2> 
         </div>
+        <div class=<%= className %>>
+            <p><%= errorMessage %></p>
+        </div>
+        <form action="/eliminar-receta/<%= recipeProfile._id %>" method="POST">
+            <div>
+                <label for="recipeTitle" >Titulo de la receta:</label>
+                <input type="text" name="recipeTitle" id="recipeTitle" required/>
+            </div>
+            <div class="newUserSelect"> 
+            </div>
+            <div class="newUserSelect">
+            </div>
+            <div class="newUserButton">
+                <input type="submit" value="Eliminar" />
+            </div>    
+        </form>
+    </div>
    
 <%-  include('partials/footer.ejs') %> 

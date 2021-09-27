@@ -17,3 +17,22 @@ plusStep.addEventListener('click', () => {
     addInputLine.innerHTML = '<input type="text" name="steps" id="steps" />'
     stepBox.appendChild(addInputLine)
 })
+
+
+var lessIngredient = document.querySelector('#ingredientsLessButton')
+
+lessIngredient.addEventListener('click', () => {
+    let ingredientBox = document.querySelector('.ingredientsLine')
+    if (ingredientBox.childElementCount > 1) {
+        ingredientBox.removeChild(ingredientBox.lastElementChild)
+    }
+})
+
+var lessStep = document.querySelector('#stepsLessButton')
+
+lessStep.addEventListener('click', () => {
+    let stepBox = document.querySelector('.stepsLine')
+    if (stepBox.childElementCount > 1) {
+        stepBox.removeChild(stepBox.lastElementChild)
+    }
+})

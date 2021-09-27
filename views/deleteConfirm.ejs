@@ -2,6 +2,7 @@
 <%-  include('partials/header.ejs') %> 
 
     <% let className = errorMessage ? 'errorMessage' : 'errorMessageHidden' %>
+    <% let inputLoad = inputReload ? input : '' %>
         <div class="newUserBox">
             <div class="newUserTitle">
                 <h2>Confirma que quieres eliminar tu cuenta ingresando tu correo electrónico y contraseña</h2> 
@@ -12,17 +13,11 @@
             <form action="/eliminar-usuario" method="POST">
                 <div>
                     <label for="eMail" >Correo electrónico:</label>
-                    <input type="text" name="eMail" id="eMail" required/>
+                    <input type="text" name="eMail" id="eMail" required value="<%= inputLoad %>"/>
                 </div>
                 <div>
                     <label for="password" >Password:</label>
                     <input type="password" name="password" id="password" required/>
-                </div>
-                <div>
-                </div>  
-                <div>
-                </div>
-                <div>
                 </div>
                 <div class="newUserSelect"> 
                 </div>

@@ -5,6 +5,7 @@ const usersControllers = {
     newUser: (req, res) => {
         res.render('newUser', {
             title: 'REGISTRO',
+            inputReload: false,
             userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
             validationsError: false
         })
@@ -21,6 +22,7 @@ const usersControllers = {
             } catch (err) {
                 res.render('newUser', {
                     title: 'REGISTRO',
+                    inputReload: false,
                     userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
                     validationsError: {message: 'Hubo un problema con la base de datos. Intentetelo mas tarde.'},
                 })
@@ -32,19 +34,27 @@ const usersControllers = {
                 if (!userCheck) {
                     newUser = await User.create({
                         eMail, password: hashPassword, firstName, lastName, photo, job, country
-                    })
-                    res.redirect('/ingreso') // ver la forma de redigir a login
+                    }, { raw: true })
+                    req.session.userLogIn = true
+                    req.session.firstName = newUser.firstName
+                    req.session.eMail = newUser.eMail
+                    req.session._id = newUser.id
+                    req.session.photo = newUser.photo
+                    res.redirect('/usuario')
                 } else {
                     throw new Error()
                 }
                 res.render('newUser', {
                     title: 'REGISTRO',
+                    inputReload: false,
                     userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
                     validationsError: false,
                 })
             } catch (err) {
                 res.render('newUser', {
                     title: 'REGISTRO',
+                    inputReload: true,
+                    input: req.body,
                     userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
                     validationsError: {message: 'El correo electrónico ya está registrado.'},
                 })
@@ -81,7 +91,6 @@ const usersControllers = {
         if (req.session.userLogIn) {
             try {
                 const userProfile = await User.findOne({ where: { id: req.session._id}, raw: true })
-                console.log("usuario que viene de db", userProfile)
                 if (userProfile) {
                     res.render('user', {
                         title: 'EDITAR PERFIL',
@@ -111,7 +120,6 @@ const usersControllers = {
         if (req.session.userLogIn) {
             const {eMail, password} = req.body
             if (eMail && password) {
-                console.log("entro delete con email password")
                 try {
                     if (req.body.eMail && req.body.password) {
                         let userConfirm = await User.findOne({ where: { eMail: eMail }, raw: true })
@@ -119,8 +127,11 @@ const usersControllers = {
                         if (hashPassword) {
                             await User.destroy({ where: { eMail: eMail }, raw: true })
                             req.session.destroy(() => {
-                                res.redirect('/')
-                                //mandar a deleteOk
+                                res.render('deleteUserOk', {
+                                    title: 'USUARIO ELIMINADO',
+                                    userLogIn: false,
+                                    errorMessage: null
+                                })
                             })
                         } else {
                             throw new Error()
@@ -131,14 +142,16 @@ const usersControllers = {
                 } catch (error) {
                     res.render('deleteConfirm', {
                         title: 'ELIMINAR USUARIO',
+                        inputReload: true,
+                        input: eMail,
                         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
                         errorMessage: 'Correo electrónico o conaseña invalida',
                     })
                 }
             } else {
-                console.log("entro delete sin mail")
                 res.render('deleteConfirm', {
                     title: 'ELIMINAR USUARIO',
+                    inputReload: false,
                     userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
                     errorMessage: false           
                 })
@@ -151,6 +164,7 @@ const usersControllers = {
     logIn: (req, res) => {
         res.render('userLogin', {
             title: 'INGRESO',
+            inputReload: false,
             userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
             errorMessage: false,
         })
@@ -174,6 +188,8 @@ const usersControllers = {
         } catch (error) {
             res.render('userLogin', {
                 title: 'INGRESO',
+                inputReload: true,
+                input: eMail,
                 userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
                 errorMessage: 'Correo electrónico o conaseña invalida',
             })

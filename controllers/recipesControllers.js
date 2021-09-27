@@ -11,45 +11,52 @@ const recipesControllers = {
     },
 
     getAllRecipes: async (req, res) => {
-        // try {
-        //     let allRecipes = await Recipe.find()
-        //     res.render('recipes', {
-        //         title: 'RECETARIO',
-        //         recipesList: allRecipes,
-        //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-        //         errorMessage: null
-        //     })
-        // } catch (error) {
-        //     res.render('recipes', {
-        //         title: 'RECETARIO',
-        //         recipesList: allRecipes,
-        //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-        //         errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
-                
-        //     })
-        // }
+        try {
+            let allRecipes = await Recipe.findAll({ raw: true })
+            let allIngredients = await Ingredient.findAll({ raw: true })
+            let allSteps = await Step.findAll({ raw: true })
+            res.render('recipes', {
+                title: 'RECETARIO',
+                recipesList: allRecipes,
+                ingredientsList: allIngredients,
+                stepsList: allSteps,
+                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                errorMessage: null
+            })
+        } catch (error) {
+            res.render('recipes', {
+                title: 'RECETARIO',
+                recipesList: allRecipes,
+                userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
+            })
+        }
     },
 
     getRecipesByUser: async (req, res) => {
         if (req.session.userLogIn) {
-            // try {
-            //     let userRecipes = await Recipe.find({ userId: req.session._id })
-            //     res.render('userRecipes', {
-            //         title: 'MIS RECETAS',
-            //         recipesList: userRecipes,
-            //         userName: req.session.name,
-            //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-            //         errorMessage: null
-            //     })
-            // } catch (error) {
-            //     res.render('userRecipes', {
-            //         title: 'MIS RECETAS',
-            //         recipesList: userRecipes,
-            //         userName: req.session.name,
-            //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-            //         errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
-            //     })
-            // }
+            try {
+                let userRecipes = await Recipe.findAll({ where: { UserId: req.session._id }, raw: true })
+                let userRecipesIngredients = await Ingredient.findAll({ where: { UserId: req.session._id }, raw: true})
+                let userRecipesSteps = await Step.findAll({ where: { UserId: req.session._id }, raw: true})
+                res.render('userRecipes', {
+                    title: 'MIS RECETAS',
+                    recipesList: userRecipes,
+                    ingredientsList: userRecipesIngredients,
+                    stepsList: userRecipesSteps, 
+                    userName: req.session.name,
+                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                    errorMessage: null
+                })
+            } catch (error) {
+                res.render('userRecipes', {
+                    title: 'MIS RECETAS',
+                    recipesList: userRecipes,
+                    userName: req.session.name,
+                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                    errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
+                })
+            }
         } else {
             res.redirect('/')
         }
@@ -70,61 +77,69 @@ const recipesControllers = {
 
     sendNewRecipe: async (req, res) => {
         const {recipePhoto, recipeTitle, description, duration, rations, ingredients, steps} = req.body
-        // let newRecipe
         if (req.query.edit) {
-        //     newRecipe = await Recipe.findOne({ _id: req.query.id })
-        //     newRecipe.recipePhoto = recipePhoto
-        //     newRecipe.recipeTitle = recipeTitle
-        //     newRecipe.description = description
-        //     newRecipe.duration = duration
-        //     newRecipe.rations = rations
-        //     newRecipe.ingredients = ingredients
-        //     newRecipe.steps = steps
+            let editRecipe = await Recipe.update({
+                recipePhoto, recipeTitle, description, duration, rations
+            }, { where: { id: req.query.id}}, { raw: true })
+            await Ingredient.destroy({ where: { RecipeId: req.query.id}})
+            if (Array.isArray(ingredients)) {
+                ingredients.forEach(async (ingredient) => {
+                    await Ingredient.create({ ingredient, RecipeId: req.query.id, UserId: req.session._id })
+                })
+            } else {
+                await Ingredient.create({ ingredient: ingredients, RecipeId: req.query.id, UserId: req.session._id })
+            }
+            await Step.destroy({ where: { RecipeId: req.query.id}})
+            if (Array.isArray(steps)) {
+                steps.forEach(async (step) => {
+                    await Step.create({ step, RecipeId: req.query.id, UserId: req.session._id })
+                })
+            } else {
+                await Step.create({ step: steps, RecipeId: req.query.id, UserId: req.session._id })
+            }
+            res.redirect(`/receta/${req.query.id}`)
         } else {
             try {
                 let newRecipe = await Recipe.create({
                     recipePhoto, recipeTitle, description, duration, rations, UserId: req.session._id
-                })
+                }, { raw: true })
                 if (Array.isArray(ingredients)) {
                     ingredients.forEach(async (ingredient) => {
-                        await Ingredient.create({ ingredient, RecipeId: newRecipe.dataValues.id })
+                        await Ingredient.create({ ingredient, RecipeId: newRecipe.id, UserId: req.session._id })
                     })
                 } else {
-                    await Ingredient.create({ ingredient: ingredients, RecipeId: newRecipe.dataValues.id })
+                    await Ingredient.create({ ingredient: ingredients, RecipeId: newRecipe.id, UserId: req.session._id })
                 }
                 if (Array.isArray(steps)) {
                     steps.forEach(async (step) => {
-                        await Step.create({ step, RecipeId: newRecipe.dataValues.id })
+                        await Step.create({ step, RecipeId: newRecipe.id, UserId: req.session._id })
                     })
                 } else {
-                    await Step.create({ step: steps, RecipeId: newRecipe.dataValues.id })
+                    await Step.create({ step: steps, RecipeId: newRecipe.id, UserId: req.session._id })
                 }
-                
+                res.redirect(`/receta/${newRecipe.id}`)
             } catch (error) {
-                console.log(error)
+                res.render('newRecipe', {
+                    title: 'NUEVA RECETA',
+                    editRecipe: false,
+                    userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                    errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
+                })
             }
-        //     newRecipe = new Recipe({ recipePhoto, recipeTitle, description, duration, rations, ingredients, steps, userId: req.session._id })
         }
-        // try {
-        //     await newRecipe.save()
-        //     res.redirect(`/receta/${newRecipe._id}`)
-        // } catch (error) {
-        //     res.render('newRecipe', {
-        //         title: 'NUEVA RECETA',
-        //         editRecipe: false,
-        //         userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
-        //         errorMessage: 'Hubo un problema con la base de datos. Intente mas tarde.'
-        //     })
-        // }
     },
 
     getRecipe: async (req, res) => {
         if (req.session.userLogIn) {
             try {
-                 recipeProfile = await Recipe.findOne({ _id: req.params.id })
+                let recipeProfile = await Recipe.findOne({ where: { id: req.params.id }, raw: true })
+                let ingredientsForRecipe = await Ingredient.findAll({ where: { RecipeId: recipeProfile.id }, raw: true })                
+                let stepsForRecipe = await Step.findAll({ where: { RecipeId: recipeProfile.id }, raw: true })
                 res.render('recipe', {
                     title: 'MI RECETA',
-                    recipeProfile: recipeProfile, 
+                    recipeProfile: recipeProfile,
+                    ingredients: ingredientsForRecipe,
+                    steps: stepsForRecipe, 
                     editRecipe: false,
                     userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
                     validationsError: null,
@@ -148,14 +163,19 @@ const recipesControllers = {
     editRecipe: async (req, res) => {
         if (req.session.userLogIn) {
             try {
-                const recipeProfile = await Recipe.findOne({ _id: req.params.id })
+                let recipeProfile = await Recipe.findOne({ where: { id: req.params.id }, raw: true })
+                let ingredientsForRecipe = await Ingredient.findAll({ where: { RecipeId: recipeProfile.id }, raw: true })                
+                let stepsForRecipe = await Step.findAll({ where: { RecipeId: recipeProfile.id }, raw: true })
                 res.render('recipe', {
-                    title: 'EDITAR RECETA',
-                    recipeProfile,
+                    title: 'MI RECETA',
+                    recipeProfile: recipeProfile,
+                    ingredients: ingredientsForRecipe,
+                    steps: stepsForRecipe, 
                     editRecipe: true,
                     userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
+                    validationsError: null,
                     errorMessage: null
-                })  
+                })
             } catch (error) {
                 res.render('recipe', {
                     title: 'EDITAR RECETA',
@@ -174,10 +194,12 @@ const recipesControllers = {
         if (req.session.userLogIn) {
             if (req.body.recipeTitle) {
                 try {
-                    if (req.body.recipeTitle) {
-                        let recipeCheck = await Recipe.findOne({ recipeTitle: req.body.recipeTitle })
-                        if (recipeCheck) {
-                            await Recipe.findOneAndDelete({ _id: req.params.id })
+                    let recipeCheck = await Recipe.findByPk(req.params.id, { raw: true })
+                    if (recipeCheck) {
+                        if (recipeCheck.recipeTitle === req.body.recipeTitle) {
+                            await Ingredient.destroy({ where: { RecipeId: recipeCheck.id}})
+                            await Step.destroy({ where: { RecipeId: recipeCheck.id}})
+                            await Recipe.destroy({ where: { id: req.params.id }})
                             res.render('deleteOk', {
                                 title: 'RECETA ELIMINADA',
                                 userLogIn: req.session.userLogIn ? req.session.userLogIn : false,
@@ -209,7 +231,6 @@ const recipesControllers = {
             res.redirect('/')
         }
     }
-
 }
 
 module.exports = recipesControllers;
