@@ -1,7 +1,9 @@
 const express = require('express');
 const router = require('./routes/index');
 const session = require('express-session');
+
 require('dotenv').config();
+
 const Sequelize = require('sequelize');
 const db = require('./config/db');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
